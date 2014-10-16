@@ -1,14 +1,7 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -17,3 +10,46 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {
+    url: '/',
+    templateUrl: 'templates/home.html'
+  })
+  .state('oneVar', {
+    url: '/oneVar',
+    templateUrl: 'templates/oneVar.html'
+  })
+  .state('eqSys', {
+    url: '/eqSys',
+    templateUrl: 'templates/eqSys.html'
+  })
+  .state('interpolation', {
+    url: '/interpolation',
+    templateUrl: 'templates/interpolation.html'
+  })
+})
+
+// .config(function($routeProvider, $locationProvider) {
+//   $routeProvider
+//     .when('/home' , {
+//       controller: 'HomeController',
+//       templateUrl: 'templates/home.html'
+//     })
+//     .when('/oneVar', {
+//       controller: 'OneVarController',
+//       templateUrl: 'templates/oneVar.html'
+//     })
+//     .when('/eqSys', {
+//       controller: 'EqSysController',
+//       templateUrl: 'templates/eqSys.html'
+//     })
+//     .when('/interpolation', {
+//       controller: 'InterpolationController',
+//       templateUrl: 'templates/interpolation.html'
+//     })
+//     .otherwise({ redirectTo: '/home' });
+// })
