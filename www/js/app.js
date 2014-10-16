@@ -12,44 +12,44 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/app/home');
 
   $stateProvider
-  .state('home', {
-    url: '/',
-    templateUrl: 'templates/home.html'
+  .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/menu.html'
   })
-  .state('oneVar', {
+  .state('app.home', {
+    url: '/home',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/home.html'
+      }
+    }
+  })
+  .state('app.oneVar', {
     url: '/oneVar',
-    templateUrl: 'templates/oneVar.html'
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar.html'
+      }
+    }
   })
-  .state('eqSys', {
+  .state('app.eqSys', {
     url: '/eqSys',
-    templateUrl: 'templates/eqSys.html'
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/eqSys.html'
+      }
+    }
   })
-  .state('interpolation', {
+  .state('app.interpolation', {
     url: '/interpolation',
-    templateUrl: 'templates/interpolation.html'
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/interpolation.html'
+      }
+    }
   })
 })
-
-// .config(function($routeProvider, $locationProvider) {
-//   $routeProvider
-//     .when('/home' , {
-//       controller: 'HomeController',
-//       templateUrl: 'templates/home.html'
-//     })
-//     .when('/oneVar', {
-//       controller: 'OneVarController',
-//       templateUrl: 'templates/oneVar.html'
-//     })
-//     .when('/eqSys', {
-//       controller: 'EqSysController',
-//       templateUrl: 'templates/eqSys.html'
-//     })
-//     .when('/interpolation', {
-//       controller: 'InterpolationController',
-//       templateUrl: 'templates/interpolation.html'
-//     })
-//     .otherwise({ redirectTo: '/home' });
-// })
