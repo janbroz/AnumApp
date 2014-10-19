@@ -6,23 +6,23 @@
     <div class="list list-inset">
       <label class="item item-input item-floating-label">
         <span class="input-label">F(x)</span>
-        <input type="text" placeholder="{{f}}" ng-model="f">
+        <input type="text" placeholder="{{f}}" ng-model="input.f">
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">G(x)</span>
-        <input type="text" placeholder="{{g}}" ng-model="g">
+        <input type="text" placeholder="{{g}}" ng-model="input.g">
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">N. Iterations</span>
-        <input type="number" ng-model="nIter">
+        <input type="number" ng-model="input.nIter">
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">X0</span>
-        <input type="number" ng-model="x0">
+        <input type="number" ng-model="input.x0">
       </label>
       <label class="item item-input item-floating-label">
         <span class="input-label">Tolerance</span>
-        <input type="number" ng-model="tol">
+        <input type="number" ng-model="input.tol">
       </label>
       <br>
       <button class="button button-block button-dark" ng-click="calc()">

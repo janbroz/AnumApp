@@ -10,10 +10,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col" ng-repeat="pollo in data.headers">{{pollo}}</div>
+        <div class="col" ng-repeat="pollo in data.headers"><strong>{{pollo}}</strong></div>
       </div>
       <div class="row" ng-repeat="row in data.rows">
-        <div class="col" ng-repeat="col in row">{{col}}</div>
+        <div class="col" ng-repeat="col in row track by $index">{{col}}</div>
       </div>
       <br>
       <button class="button button-block button-dark padding-horizontal" ng-click="back()">
