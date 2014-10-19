@@ -1,4 +1,4 @@
-angular.module('CalcNA.oneVar', ['ionic'])
+  angular.module('CalcNA.oneVar', ['ionic'])
 
 .controller('OneVarInsertCtrl', function($scope, $state) {
   $scope.eq = {};
@@ -132,7 +132,15 @@ angular.module('CalcNA.oneVar', ['ionic'])
           var counter = 1;
           var error = tol + 1;
           $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([xi, xs, xm, fxm, error]);
+          $scope.data.rows.push([
+            math.format(xi, {
+            precision: 14
+          }), math.format(xs ,{
+            precision: 14
+          }), math.format(xm ,{
+            precision: 14
+          }), fxm, error]);
+          //$scope.data.rows.push([xi, xs, xm, fxm, error]);
           while ((error > tol) && (fxm != 0) && (counter < nIter)) {
             if (fxi * fxm < 0) {
               xs = xm;
@@ -226,7 +234,15 @@ angular.module('CalcNA.oneVar', ['ionic'])
           var counter = 1;
           var error = tol + 1;
           $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([xi, xs, xm, fxm, error]);
+          $scope.data.rows.push([
+            math.format(xi, {
+            precision: 14
+          }), math.format(xs ,{
+            precision: 14
+          }), math.format(xm ,{
+            precision: 14
+          }), fxm, error]);
+          //$scope.data.rows.push([xi, xs, xm, fxm, error]);
           while ((error > tol) && (fxm != 0) && (counter < nIter)) {
             if (fxi * fxm < 0) {
               xs = xm;
@@ -327,6 +343,12 @@ angular.module('CalcNA.oneVar', ['ionic'])
       error = Math.abs(xn - x0);
       x0 = xn;
       count++;
+      $scope.data.rows.push([
+        math.format(x0, {
+        precision: 14
+      }), math.format(fx0 ,{
+        precision: 14
+      }), error]);
       $scope.data.rows.push([x0, fx0, error]);
     }
     if (fx0 === 0) {
@@ -394,6 +416,14 @@ angular.module('CalcNA.oneVar', ['ionic'])
     var count = 0;
 
     $scope.data.headers = ["Xn", "f(Xn)", "f'(Xn)", "Error"];
+    $scope.data.rows.push([
+      math.format(x0, {
+      precision: 14
+    }), math.format(fx0 ,{
+      precision: 14
+    }), math.format(dfx0 ,{
+      precision: 14
+    }), error]);
     $scope.data.rows.push([x0, fx0, dfx0, error]);
 
     while ((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
