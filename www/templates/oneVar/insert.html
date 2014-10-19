@@ -1,0 +1,29 @@
+<ion-view title="Insert Equations 1">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <div class="list list-inset">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">F(x)</span>
+        <input type="text" placeholder="F(x)" ng-model="eq.f">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">F'(x)</span>
+        <input type="text" placeholder="F'(x)" ng-model="eq.ff">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">F''(x)</span>
+        <input type="text" placeholder="F''(x)" ng-model="eq.fff">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">G(x)</span>
+        <input type="text" placeholder="G(x)" ng-model="eq.g">
+      </label>
+      <br>
+      <button class="button button-block button-dark" ng-click="store()">
+        Save
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

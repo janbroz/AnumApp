@@ -2,6 +2,7 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+    math.config({number: 'bignumber'});
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -33,6 +34,78 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
     views: {
       'menuContent' :{
         templateUrl: 'templates/oneVar.html'
+      }
+    }
+  })
+  .state('app.insert1', {
+    url: '/insert1',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/insert.html',
+        controller: 'OneVarInsertCtrl'
+      }
+    }
+  })
+  .state('app.incSearch', {
+    url: '/incSearch',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/incSearch.html',
+        controller: 'IncSearchtCtrl'
+      }
+    }
+  })
+  .state('app.bisection', {
+    url: '/bisection',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/bisection.html',
+        controller: 'BisectionCtrl'
+      }
+    }
+  })
+  .state('app.falsePosition', {
+    url: '/falsePosition',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/falsePosition.html',
+        controller: 'FalsePositionCtrl'
+      }
+    }
+  })
+  .state('app.fixedPoint', {
+    url: '/fixedPoint',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/fixedPoint.html',
+        controller: 'FixedPointCtrl'
+      }
+    }
+  })
+  .state('app.newton', {
+    url: '/newton',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/newton.html',
+        controller: 'NewtontCtrl'
+      }
+    }
+  })
+  .state('app.secant', {
+    url: '/secant',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/secant.html',
+        controller: 'SecantCtrl'
+      }
+    }
+  })
+  .state('app.multRoots', {
+    url: '/multRoots',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/oneVar/multRoots.html',
+        controller: 'MultRootsCtrl'
       }
     }
   })

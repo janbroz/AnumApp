@@ -1,0 +1,23 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Result</h1>
+  </ion-header-bar>
+  <ion-content>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <p>Root at:</p>
+          <p>{{data.root}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" ng-repeat="pollo in data.headers">{{pollo}}</div>
+      </div>
+      <div class="row" ng-repeat="row in data.rows">
+        <div class="col" ng-repeat="col in row">{{col}}</div>
+      </div>
+      <br>
+      <button class="button button-block button-dark padding-horizontal" ng-click="back()">
+        Go back
+      </button>
+  </ion-content>
+</ion-modal-view>

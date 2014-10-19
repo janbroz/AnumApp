@@ -1,1 +1,6 @@
 /* Empty. Add your own CSS if you like */
+.col {
+  text-align:center;
+  background-color:#f2f2f2;
+  border:thin gray solid;
+}
