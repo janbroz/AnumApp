@@ -117,6 +117,87 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
       }
     }
   })
+  .state('app.geSimple', {
+    url: '/geSimple',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/eqSys/geSimple.html',
+        controller:'GeSimpleCtrl'
+      }
+    }
+  })
+  .state('app.geSimpleTotal',{
+    url:'/geSimpleTotal',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/geSimpleTotal.html',
+        controller:'GeSimpleTotalCtrl'
+      }
+    }
+  })
+  .state('app.geSimplePartial',{
+    url:'/geSimplePartial',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/geSimplePartial.html',
+        controller:'GeSimplePartialCtrl'
+      }
+    }
+  })
+  .state('app.geSimpleStep',{
+    url:'/geSimpleStep',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/geSimpleStep.html',
+        controller:'GeSimpleStepCtrl'
+      }
+    }
+  })
+  .state('app.cholesky',{
+    url:'/cholesky',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/cholesky.html',
+        controller:'CholeskyCtrl'
+      }
+    }
+  })
+  .state('app.crout',{
+    url:'/crout',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/crout.html',
+        controller:'CroutCtrl'
+      }
+    }
+  })
+  .state('app.doolitle',{
+    url:'/doolitle',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/doolitle.html',
+        controller:'DoolitleCtrl'
+      }
+    }
+  })
+  .state('app.gaussSeidel',{
+    url:'/gaussSeidel',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/gaussSeidel.html',
+        controller:'GaussSeidelCtrl'
+      }
+    }
+  })
+  .state('app.jacobi',{
+    url:'/jacobi',
+    views: {
+      'menuContent':{
+        templateUrl:'templates/eqSys/jacobi.html',
+        controller:'JacobiCtrl'
+      }
+    }
+  })
   .state('app.interpolation', {
     url: '/interpolation',
     views: {
