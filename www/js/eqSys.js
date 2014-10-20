@@ -33,6 +33,35 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('EqSysInsertCtrl', function($scope, $state){
+  /* codigo pipe para leer matrices
+  $scope.matrix = [];
+  var matSize = parseInt(localStorage.matrixSize);
+  for(var i=0; i<matSize; i++) {
+    var row = [];
+    for(var j=0; j<matSize; j++) {
+      row.push({ value : 0});
+    }
+    $scope.matrix.push(row);
+  }
+  console.log($scope.matrix);
+  $scope.showMatrix = function(){
+    console.log($scope.matrix);
+  };*/
+  var size = parseInt(localStorage.matrixSize);
+  var matrix = new Array(size);
+  for(var i = 0 ; i < size ; i++){
+    matrix[i] = new Array(size);
+  }
+  for(var i = 0 ; i < size; i++){
+    for (var j = 0 ; j < size ; j++){
+      matrix[i][j] = 0;
+    }
+  }
+  console.log(matrix);
+  $scope.matriz = matrix;
+  $scope.showMatrix = function(){
+    console.log($scope.matriz);
+  }
 })
 
 .controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal){

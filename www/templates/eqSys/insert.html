@@ -3,5 +3,12 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class = "has-header">
+  <div ng-repeat = "row in matriz track by $index" class = "row">
+
+  	<div ng-repeat = "element in row track by $index" class = "col">
+  		<input type="number" ng-model = "matriz[$parent.$index][$index]">
+  	</div>
+  </div>
+  <button ng-click = "showMatrix()">Boton de prueba</button>
   </ion-content>
 </ion-view>
