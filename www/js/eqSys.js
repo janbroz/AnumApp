@@ -33,34 +33,28 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('EqSysInsertCtrl', function($scope, $state){
-  /* codigo pipe para leer matrices
-  $scope.matrix = [];
-  var matSize = parseInt(localStorage.matrixSize);
-  for(var i=0; i<matSize; i++) {
-    var row = [];
-    for(var j=0; j<matSize; j++) {
-      row.push({ value : 0});
-    }
-    $scope.matrix.push(row);
-  }
-  console.log($scope.matrix);
-  $scope.showMatrix = function(){
-    console.log($scope.matrix);
-  };*/
   var size = parseInt(localStorage.matrixSize);
-  var matrix = new Array(size);
+  $scope.matrix = new Array(size);
+  $scope.vector = new Array(size);
   for(var i = 0 ; i < size ; i++){
-    matrix[i] = new Array(size);
+    $scope.matrix[i] = new Array(size);
   }
   for(var i = 0 ; i < size; i++){
+    $scope.vector[i] = 0;
     for (var j = 0 ; j < size ; j++){
-      matrix[i][j] = 0;
+      $scope.matrix[i][j] = 0;
     }
   }
-  console.log(matrix);
-  $scope.matriz = matrix;
-  $scope.showMatrix = function(){
-    console.log($scope.matriz);
+
+
+  $scope.store = function(){
+    for(var i=0; i<$scope.matrix.length; i++) {
+      for(var j=0; j<$scope.matrix[0].length; j++) {
+        localStorage.setItem("A"+i+j, $scope.matrix[i][j]);
+      }
+      localStorage.setItem("b"+i, $scope.vector[i]);
+    }
+    $state.go('app.eqSys');
   }
 })
 
@@ -87,6 +81,3 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal){
 })
-
-
-

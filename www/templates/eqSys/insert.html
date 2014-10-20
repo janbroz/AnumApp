@@ -2,13 +2,23 @@
   <ion-nav-buttons side ="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class = "has-header">
-  <div ng-repeat = "row in matriz track by $index" class = "row">
-
-  	<div ng-repeat = "element in row track by $index" class = "col">
-  		<input type="number" ng-model = "matriz[$parent.$index][$index]">
-  	</div>
-  </div>
-  <button ng-click = "showMatrix()">Boton de prueba</button>
+  <ion-content class="has-header">
+    <h3>A:</h1>
+    <div ng-repeat="row in matrix track by $index" class="row">
+    	<div ng-repeat="element in row track by $index" class="col">
+    		<input type="number" ng-model="matrix[$parent.$index][$index]">
+    	</div>
+    </div
+    <br>
+    <br>
+    <h3>b:</h1>  
+    <div class="row">
+      <div ng-repeat="val in vector track by $index" class="col">
+        <input type="number" ng-model="vector[$index]">
+      </div>
+    </div>
+    <button class="button button-block button-dark" ng-click="store()">
+      Save
+    </button>
   </ion-content>
 </ion-view>
