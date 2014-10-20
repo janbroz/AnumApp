@@ -113,7 +113,17 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
     url: '/eqSys',
     views: {
       'menuContent' :{
-        templateUrl: 'templates/eqSys.html'
+        templateUrl: 'templates/eqSys.html',
+        controller:'EqSysCtrl'
+      }
+    }
+  })
+  .state('app.insert2', {
+    url: '/insert2',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/eqSys/insert.html',
+        controller:'EqSysInsertCtrl'
       }
     }
   })
