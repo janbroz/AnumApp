@@ -1,31 +1,31 @@
-function getMatrix(){
+function getMatrix() {
   var size = parseInt(localStorage.matrixSize);
   var matrix = new Array(size);
 
-  for(var i = 0 ; i < size ; i++){
+  for (var i = 0; i < size; i++) {
     matrix[i] = new Array(size);
   }
 
-  for(var i = 0 ; i < size; i++){
-    for (var j = 0 ; j < size ; j++){
-      matrix[i][j] = parseFloat(localStorage.getItem("A"+i+j));
+  for (var i = 0; i < size; i++) {
+    for (var j = 0; j < size; j++) {
+      matrix[i][j] = parseFloat(localStorage.getItem("A" + i + j));
     }
   }
   return matrix;
 }
 
-function getVector(){
+function getVector() {
   var size = parseInt(localStorage.matrixSize);
   var vector = new Array(size);
-  for(var i = 0 ; i < size; i++){
-    vector[i] = parseFloat(localStorage.getItem("b"+i));
+  for (var i = 0; i < size; i++) {
+    vector[i] = parseFloat(localStorage.getItem("b" + i));
   }
   return vector;
 }
 
 angular.module('CalcNA.eqSys', ['ionic'])
 
-.controller('EqSysCtrl', function($scope, $state, $ionicPopup){
+.controller('EqSysCtrl', function($scope, $state, $ionicPopup) {
   $scope.input = {};
   $scope.showPopup = function() {
     $scope.data = {}
@@ -34,58 +34,54 @@ angular.module('CalcNA.eqSys', ['ionic'])
       title: 'Enter matrix size',
       subTitle: 'NxN',
       scope: $scope,
-      buttons: [
-        { text: 'Cancel',
-          onTap: function(e) {
-            return null;
+      buttons: [{
+        text: 'Cancel',
+        onTap: function(e) {
+          return null;
+        }
+      }, {
+        text: '<b>Next</b>',
+        type: 'button-dark',
+        onTap: function(e) {
+          if (!$scope.data.matrixSize) {
+            e.preventDefault();
+          } else {
+            return $scope.data.matrixSize;
           }
-        },
-        {
-          text: '<b>Next</b>',
-          type: 'button-dark',
-          onTap: function(e) {
-            if (!$scope.data.matrixSize) {
-              e.preventDefault();
-            } else {
-              return $scope.data.matrixSize;
-            }
-          }
-        },
-      ]
+        }
+      }, ]
     });
     myPopup.then(function(res) {
-      if(res != null) {
+      if (res != null) {
         localStorage.matrixSize = res;
         $state.go('app.insert2');
       }
     });
-   };
+  };
   $scope.gePopup = function() {
     var myPopup = $ionicPopup.show({
       templateUrl: 'templates/eqSys/pivotingOptions.html',
       title: 'Choose type of pivoting',
       scope: $scope,
-      buttons: [
-        { text: 'Cancel',
-          onTap: function(e) {
-            return null;
+      buttons: [{
+        text: 'Cancel',
+        onTap: function(e) {
+          return null;
+        }
+      }, {
+        text: '<b>Next</b>',
+        type: 'button-dark',
+        onTap: function(e) {
+          if ($scope.input.pivotingType == undefined) {
+            e.preventDefault();
+          } else {
+            return $scope.input.pivotingType;
           }
-        },
-        {
-          text: '<b>Next</b>',
-          type: 'button-dark',
-          onTap: function(e) {
-            if ($scope.input.pivotingType == undefined) {
-              e.preventDefault();
-            } else {
-              return $scope.input.pivotingType;
-            }
-          }
-        },
-      ]
+        }
+      }, ]
     });
     myPopup.then(function(res) {
-      switch(res) {
+      switch (res) {
         case 0:
           $state.go('app.geSimple');
           break;
@@ -108,27 +104,25 @@ angular.module('CalcNA.eqSys', ['ionic'])
       templateUrl: 'templates/eqSys/luOptions.html',
       title: 'Choose type of LU Factorization',
       scope: $scope,
-      buttons: [
-        { text: 'Cancel',
-          onTap: function(e) {
-            return null;
+      buttons: [{
+        text: 'Cancel',
+        onTap: function(e) {
+          return null;
+        }
+      }, {
+        text: '<b>Next</b>',
+        type: 'button-dark',
+        onTap: function(e) {
+          if ($scope.input.luType == undefined) {
+            e.preventDefault();
+          } else {
+            return $scope.input.luType;
           }
-        },
-        {
-          text: '<b>Next</b>',
-          type: 'button-dark',
-          onTap: function(e) {
-            if ($scope.input.luType == undefined) {
-              e.preventDefault();
-            } else {
-              return $scope.input.luType;
-            }
-          }
-        },
-      ]
+        }
+      }, ]
     });
     myPopup.then(function(res) {
-      switch(res) {
+      switch (res) {
         case 0:
           $state.go('app.cholesky');
           break;
@@ -155,95 +149,96 @@ angular.module('CalcNA.eqSys', ['ionic'])
   };
 })
 
-.controller('EqSysInsertCtrl', function($scope, $state){
+.controller('EqSysInsertCtrl', function($scope, $state) {
   var size = parseInt(localStorage.matrixSize);
   $scope.matrix = new Array(size);
   $scope.vector = new Array(size);
-  for(var i = 0 ; i < size ; i++){
+  for (var i = 0; i < size; i++) {
     $scope.matrix[i] = new Array(size);
   }
-  for(var i = 0 ; i < size; i++){
+  for (var i = 0; i < size; i++) {
     $scope.vector[i] = 0;
-    for (var j = 0 ; j < size ; j++){
+    for (var j = 0; j < size; j++) {
       $scope.matrix[i][j] = 0;
     }
   }
 
 
-  $scope.store = function(){
-    for(var i=0; i<$scope.matrix.length; i++) {
-      for(var j=0; j<$scope.matrix[0].length; j++) {
-        localStorage.setItem("A"+i+j, $scope.matrix[i][j]);
+  $scope.store = function() {
+    for (var i = 0; i < $scope.matrix.length; i++) {
+      for (var j = 0; j < $scope.matrix[0].length; j++) {
+        localStorage.setItem("A" + i + j, $scope.matrix[i][j]);
       }
-      localStorage.setItem("b"+i, $scope.vector[i]);
+      localStorage.setItem("b" + i, $scope.vector[i]);
     }
     $state.go('app.eqSys');
   }
 })
 
-.controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal){
-
-    $scope.calc = function() {
-        var a = $scope.matrix;
-        var b = $scope.vector;
-        $scope.data = {};
-        $scope.data.rows = [];
-
-        for(var k=1; k<size; k++) {
-            for(var i=k; i<size; i++) {
-                if(a[i][i] != 0) {
-                    var mult = a[i][k] / a[k][k]
-                    for(var j=0; j<=size; j++) {
-                        a[i][j] -= mult * a[k][j]
-                        console.log(a[i][j]);
-                    }
-                } else {
-                    alert("There's a zero in the diagonal, try another method.")
-                }
-            }
+.controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal) {
+  $scope.calc = function() {
+    var n = parseInt(localStorage.matrixSize);
+    var a = getMat(n);
+    for (var k = 1; k < n; k++) {
+      for (var i = k; i < n; i++) {
+        if (a[i][i] != 0) {
+          var mult = a[i][k] / a[k][k]
+          for (var j = 0; j <= n; j++) {
+            a[i][j] -= mult * a[k][j]
+          }
+        } else {
+          alert("There's a zero in the diagonal, try another method.")
         }
+      }
     }
+    console.log(a);
+  }
 
-    $scope.input = {};
+  $scope.input = {};
 
-    $scope.back = function() {
-      $scope.modal.hide();
+  $scope.back = function() {
+    $scope.modal.hide();
+  }
+
+  $scope.help = function() {
+    $scope.methodName = "Bisection";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
+})
+
+.controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {})
+
+.controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {});
+
+function getMat(n) {
+  var mat = [];
+  for (var i = 0; i < n; i++) {
+    var row = [];
+    for (var j = 0; j < n; j++) {
+      row.push(parseFloat(localStorage.getItem("A" + i + j)));
     }
-
-    $scope.help = function() {
-      $scope.methodName = "Bisection";
-      $scope.helpText = "texto ayuda";
-      $ionicModal.fromTemplateUrl('templates/help.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal = modal;
-        modal.show();
-      });
-    }
-
-})
-
-.controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal){
-})
-
-.controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal){
-})
+    row.push(parseFloat(localStorage.getItem("b" + i)));
+    mat.push(row);
+  }
+  return mat;
+}
