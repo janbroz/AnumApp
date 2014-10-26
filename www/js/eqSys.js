@@ -192,6 +192,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
       }
     }
     console.log(a);
+    var result = regresiveSustitution(a,n);
   }
 
   $scope.input = {};
@@ -241,4 +242,16 @@ function getMat(n) {
     mat.push(row);
   }
   return mat;
+}
+function regresiveSustitution(Ab, n){
+  var x = new Array(n);
+  x[n-1] = Ab[n-1][n] / Ab[n-1][n-1];
+  for(var i = n-1 ; i >= 0; i--){
+    var acum = 0;
+    for(var p = i+1 ; p < n; p++ ){
+      acum += Ab[i][p]*x[p];
+    }
+    x[i] = (Ab[i][n]-acum)/Ab[i][i];
+  }
+  return x;
 }
