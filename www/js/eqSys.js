@@ -1,3 +1,28 @@
+function getMatrix(){
+  var size = parseInt(localStorage.matrixSize);
+  var matrix = new Array(size);
+
+  for(var i = 0 ; i < size ; i++){
+    matrix[i] = new Array(size);
+  }
+
+  for(var i = 0 ; i < size; i++){
+    for (var j = 0 ; j < size ; j++){
+      matrix[i][j] = parseFloat(localStorage.getItem("A"+i+j));
+    }
+  }
+  return matrix;
+}
+
+function getVector(){
+  var size = parseInt(localStorage.matrixSize);
+  var vector = new Array(size);
+  for(var i = 0 ; i < size; i++){
+    vector[i] = parseFloat(localStorage.getItem("b"+i));
+  }
+  return vector;
+}
+
 angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('EqSysCtrl', function($scope, $state, $ionicPopup){
@@ -29,7 +54,6 @@ angular.module('CalcNA.eqSys', ['ionic'])
       ]
     });
     myPopup.then(function(res) {
-      console.log(res);
       if(res != null) {
         localStorage.matrixSize = res;
         $state.go('app.insert2');
@@ -158,6 +182,46 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal){
+
+    $scope.calc = function() {
+        var a = $scope.matrix;
+        var b = $scope.vector;
+        $scope.data = {};
+        $scope.data.rows = [];
+
+        for(var k=1; k<size; k++) {
+            for(var i=k; i<size; i++) {
+                if(a[i][i] != 0) {
+                    var mult = a[i][k] / a[k][k]
+                    for(var j=0; j<=size; j++) {
+                        a[i][j] -= mult * a[k][j]
+                        console.log(a[i][j]);
+                    }
+                } else {
+                    alert("There's a zero in the diagonal, try another method.")
+                }
+            }
+        }
+    }
+
+    $scope.input = {};
+
+    $scope.back = function() {
+      $scope.modal.hide();
+    }
+
+    $scope.help = function() {
+      $scope.methodName = "Bisection";
+      $scope.helpText = "texto ayuda";
+      $ionicModal.fromTemplateUrl('templates/help.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.modal = modal;
+        modal.show();
+      });
+    }
+
 })
 
 .controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal){
