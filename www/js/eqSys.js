@@ -243,6 +243,7 @@ function getMat(n) {
 }
 function regresiveSustitution(Ab, n){
   var x = new Array(n);
+  var result = "";
   x[n-1] = Ab[n-1][n] / Ab[n-1][n-1];
   for(var i = n-1 ; i >= 0; i--){
     var acum = 0;
@@ -251,5 +252,28 @@ function regresiveSustitution(Ab, n){
     }
     x[i] = (Ab[i][n]-acum)/Ab[i][i];
   }
-  return x;
+
+
+
+  for(var i=0; i<n; i++){
+      result += "X" + i + "= " + format1(x[i]) + " ";
+  }
+  return result;
+}
+
+function format1(number) {
+  return math.format(number,
+    {
+      precision: 6
+    }
+  );
+}
+
+function format2(number) {
+  return math.format(number,
+    {
+      precision: 2,
+      notation: 'exponential'
+    }
+  );
 }

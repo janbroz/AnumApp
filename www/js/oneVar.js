@@ -692,7 +692,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 function format1(number) {
   return math.format(number,
     {
-      precision: 14
+      precision: 6
     }
   );
 }
