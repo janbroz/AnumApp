@@ -33,7 +33,8 @@ angular.module('CalcNA', ['ionic', 'CalcNA.controllers'])
     url: '/oneVar',
     views: {
       'menuContent' :{
-        templateUrl: 'templates/oneVar.html'
+        templateUrl: 'templates/oneVar.html',
+        controller: 'OneVarCtrl'
       }
     }
   })

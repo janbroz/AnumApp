@@ -3,35 +3,65 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <div class="item item-divider">
-      First:
-    </div>
-    <a class="item" href="#/app/insert1">
-      Insert Equations
-    </a>
-    <div class="item item-divider">
-      Then, pick a method:
-    </div>
-    <a class="item" href="#/app/incSearch">
-      Incremental Search
-    </a>
-    <a class="item" href="#/app/bisection">
-      Bisection
-    </a>
-    <a class="item" href="#/app/falsePosition">
-      False Position
-    </a>
-    <a class="item" href="#/app/fixedPoint">
-      Fixed Point
-    </a>
-    <a class="item" href="#/app/newton">
-      Newton
-    </a>
-    <a class="item" href="#/app/secant">
-      Secant
-    </a>
-    <a class="item" href="#/app/multRoots">
-      Multiple Roots
-    </a>
+    <ion-list>
+      <ion-item class="item-stable" href="#/app/insert1">
+        Insert Equations
+      </ion-item>
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(1)"
+                ng-class="{active: isGroupShown(1)}">
+        By Intervals
+      </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(1)"
+                  href="#/app/bisection">
+          Bisection
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(1)"
+                  href="#/app/falsePosition">
+          False Position
+        </ion-item>
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(2)"
+                ng-class="{active: isGroupShown(2)}">
+        Open Methods
+      </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/fixedpoint">
+          Fixed Point
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/newton">
+          Newton
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/secant">
+          Secant
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/multRoots">
+          Multiple Roots
+        </ion-item>
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(3)"
+                ng-class="{active: isGroupShown(3)}">
+        Others
+      </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(3)"
+                  href="#/app/incSearch">
+          Incremental Search
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(3)"
+                  href="#/app/graph">
+          Graph
+        </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

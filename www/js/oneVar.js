@@ -1,5 +1,18 @@
   angular.module('CalcNA.oneVar', ['ionic'])
 
+.controller('OneVarCtrl', function($scope) {
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+})
+
 .controller('OneVarInsertCtrl', function($scope, $state) {
   $scope.eq = {};
   $scope.store = function() {
