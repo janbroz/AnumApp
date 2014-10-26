@@ -176,33 +176,27 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal) {
-  $scope.calc = function() {
-    var n = parseInt(localStorage.matrixSize);
-    var a = getMat(n);
-    for (var k = 0; k < n-1 ; k++) {
-      for (var i = k+1; i < n; i++) {
-        if (a[i][i] != 0) {
-          var mult = a[i][k] / a[k][k]
-          for (var j = k; j < n+1; j++) {
-            a[i][j] -= mult * a[k][j];
-          }
-        } else {
-          alert("There's a zero in the diagonal, try another method.")
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMat(n);
+  $scope.etapas = [];
+  for (var k = 0; k < n-1 ; k++) {
+    for (var i = k+1; i < n; i++) {
+      if (a[i][i] != 0) {
+        var mult = a[i][k] / a[k][k]
+        for (var j = k; j < n+1; j++) {
+          a[i][j] -= mult * a[k][j];
         }
+      } else {
+        alert("There's a zero in the diagonal, try another method.")
       }
     }
-    console.log(a);
-    var result = regresiveSustitution(a,n);
+    // serializa y deserializa la matriz para un deep copy
+    $scope.etapas[k] = JSON.parse(JSON.stringify(a));
   }
-
-  $scope.input = {};
-
-  $scope.back = function() {
-    $scope.modal.hide();
-  }
+  $scope.result = regresiveSustitution(a,n);
 
   $scope.help = function() {
-    $scope.methodName = "Bisection";
+    $scope.methodName = "Simple Gaussian Elimination";
     $scope.helpText = "texto ayuda";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
@@ -211,6 +205,10 @@ angular.module('CalcNA.eqSys', ['ionic'])
       $scope.modal = modal;
       modal.show();
     });
+  }
+
+  $scope.back = function() {
+    $scope.modal.hide();
   }
 
 })

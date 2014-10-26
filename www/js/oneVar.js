@@ -89,10 +89,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
     });
   }
 
-  $scope.back = function() {
-    $scope.modal.hide();
-  }
-
   $scope.help = function() {
     $scope.methodName = "Incremental Search";
     $scope.helpText = "texto ayuda de incremental search";
@@ -193,10 +189,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
       $scope.modal = modal;
       modal.show();
     });
-  }
-
-  $scope.back = function() {
-    $scope.modal.hide();
   }
 
   $scope.help = function() {
@@ -303,10 +295,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
     });
   }
 
-  $scope.back = function() {
-    $scope.modal.hide();
-  }
-
   $scope.help = function() {
     $scope.methodName = "False Position";
     $scope.helpText = "texto ayuda";
@@ -390,10 +378,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
       $scope.modal = modal;
       modal.show();
     });
-  }
-
-  $scope.back = function() {
-    $scope.modal.hide();
   }
 
   $scope.help = function() {
@@ -489,10 +473,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
     });
   }
 
-  $scope.back = function() {
-    $scope.modal.hide();
-  }
-
   $scope.help = function() {
     $scope.methodName = "Newton";
     $scope.helpText = "texto ayuda";
@@ -585,10 +565,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
       $scope.modal = modal;
       modal.show();
     });
-  }
-
-  $scope.back = function() {
-    $scope.modal.hide();
   }
 
   $scope.help = function() {
@@ -700,10 +676,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
     });
   }
 
-  $scope.back = function() {
-    $scope.modal.hide();
-  }
-
   $scope.help = function() {
     $scope.methodName = "Multiple roots";
     $scope.helpText = "texto ayuda";
@@ -715,7 +687,6 @@ angular.module('CalcNA.oneVar', ['ionic'])
       modal.show();
     });
   }
-
 });
 
 function format1(number) {
