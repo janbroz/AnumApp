@@ -1,4 +1,4 @@
-  angular.module('CalcNA.oneVar', ['ionic'])
+angular.module('CalcNA.oneVar', ['ionic'])
 
 .controller('OneVarCtrl', function($scope) {
   $scope.toggleGroup = function(group) {
@@ -57,7 +57,7 @@
       var fx1 = f.eval({
         x: x1
       });
-      $scope.data.rows.push([x0, fx0]);
+      $scope.data.rows.push([format1(x0), format2(fx0)]);
       while ((fx0 * fx1 > 0) && (counter <= nIter)) {
         x0 = x1;
         fx0 = fx1;
@@ -65,23 +65,15 @@
         fx1 = f.eval({
           x: x1
         });
-        $scope.data.rows.push([math.format(x0, {
-          precision: 14
-        }), fx0]);
+        $scope.data.rows.push([format1(x0), format2(fx0)]);
         counter++;
       }
-      $scope.data.rows.push([math.format(x1, {
-        precision: 14
-      }), fx1]);
+      $scope.data.rows.push([format1(x1), format2(fx1)]);
       if (fx1 === 0) {
         $scope.data.root = x1;
       } else {
         if (fx0 * fx1 < 0) {
-          $scope.data.root = "(" + math.format(x0, {
-            precision: 14
-          }) + ", " + math.format(x1, {
-            precision: 14
-          }) + ")";
+          $scope.data.root = "(" + format1(x0) + ", " + format1(x2) + ")";
         } else {
           $scope.data.root = "Failure after " + nIter + " iterations.";
         }
@@ -677,4 +669,21 @@
   $scope.back = function() {
     $scope.modal.hide();
   }
-})
+});
+
+function format1(number) {
+  return math.format(number,
+    {
+      precision: 14
+    }
+  );
+}
+
+function format2(number) {
+  return math.format(number,
+    {
+      precision: 2,
+      notation: 'exponential'
+    }
+  );
+}
