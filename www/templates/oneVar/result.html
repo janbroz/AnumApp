@@ -1,11 +1,13 @@
 <ion-modal-view>
   <ion-header-bar>
+    <a class="button icon-left ion-chevron-left button-clear button-dark"
+        ng-click="back()">
+      Back</a>
     <h1 class="title">Result</h1>
   </ion-header-bar>
   <ion-content>
       <div class="card">
         <div class="item item-text-wrap">
-          <p>Root at:</p>
           <p>{{data.root}}</p>
         </div>
       </div>
@@ -16,8 +18,5 @@
         <div class="col" ng-repeat="col in row track by $index">{{col}}</div>
       </div>
       <br>
-      <button class="button button-block button-dark padding-horizontal" ng-click="back()">
-        Go back
-      </button>
   </ion-content>
 </ion-modal-view>

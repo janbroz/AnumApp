@@ -100,6 +100,18 @@
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Incremental Search";
+    $scope.helpText = "texto ayuda de incremental search";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
 })
 
 .controller('BisectionCtrl', function($scope, $ionicLoading, $ionicModal) {

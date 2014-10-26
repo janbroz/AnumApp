@@ -1,35 +1,134 @@
 angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('EqSysCtrl', function($scope, $state, $ionicPopup){
+  $scope.input = {};
   $scope.showPopup = function() {
-      $scope.data = {}
-      // An elaborate, custom popup
-      var myPopup = $ionicPopup.show({
-        template: '<input type="number" ng-model="data.matrixSize">',
-        title: 'Enter matrix size',
-        subTitle: 'NxN',
-        scope: $scope,
-        buttons: [
-          { text: 'Cancel' },
-          {
-            text: '<b>Save</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-              if (!$scope.data.matrixSize) {
-                //don't allow the user to close unless he enters wifi password
-                e.preventDefault();
-              } else {
-                return $scope.data.matrixSize;
-              }
+    $scope.data = {}
+    var myPopup = $ionicPopup.show({
+      template: '<input type="number" ng-model="data.matrixSize">',
+      title: 'Enter matrix size',
+      subTitle: 'NxN',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel',
+          onTap: function(e) {
+            return null;
+          }
+        },
+        {
+          text: '<b>Next</b>',
+          type: 'button-dark',
+          onTap: function(e) {
+            if (!$scope.data.matrixSize) {
+              e.preventDefault();
+            } else {
+              return $scope.data.matrixSize;
             }
-          },
-        ]
-      });
-      myPopup.then(function(res) {
+          }
+        },
+      ]
+    });
+    myPopup.then(function(res) {
+      console.log(res);
+      if(res != null) {
         localStorage.matrixSize = res;
         $state.go('app.insert2');
-      });
-     };
+      }
+    });
+   };
+  $scope.gePopup = function() {
+    var myPopup = $ionicPopup.show({
+      templateUrl: 'templates/eqSys/pivotingOptions.html',
+      title: 'Choose type of pivoting',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel',
+          onTap: function(e) {
+            return null;
+          }
+        },
+        {
+          text: '<b>Next</b>',
+          type: 'button-dark',
+          onTap: function(e) {
+            if ($scope.input.pivotingType == undefined) {
+              e.preventDefault();
+            } else {
+              return $scope.input.pivotingType;
+            }
+          }
+        },
+      ]
+    });
+    myPopup.then(function(res) {
+      switch(res) {
+        case 0:
+          $state.go('app.geSimple');
+          break;
+        case 1:
+          $state.go('app.geSimplePartial');
+          break;
+        case 2:
+          $state.go('app.geSimpleTotal');
+          break;
+        case 3:
+          $state.go('app.geSimpleStep');
+          break;
+        default:
+          break;
+      }
+    });
+  }
+  $scope.luPopup = function() {
+    var myPopup = $ionicPopup.show({
+      templateUrl: 'templates/eqSys/luOptions.html',
+      title: 'Choose type of LU Factorization',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel',
+          onTap: function(e) {
+            return null;
+          }
+        },
+        {
+          text: '<b>Next</b>',
+          type: 'button-dark',
+          onTap: function(e) {
+            if ($scope.input.luType == undefined) {
+              e.preventDefault();
+            } else {
+              return $scope.input.luType;
+            }
+          }
+        },
+      ]
+    });
+    myPopup.then(function(res) {
+      switch(res) {
+        case 0:
+          $state.go('app.cholesky');
+          break;
+        case 1:
+          $state.go('app.crout');
+          break;
+        case 2:
+          $state.go('app.doolitle');
+          break;
+        default:
+          break;
+      }
+    });
+  }
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
 })
 
 .controller('EqSysInsertCtrl', function($scope, $state){
@@ -62,6 +161,9 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal){
+})
+
+.controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal){
 })
 
 .controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal){
