@@ -179,12 +179,12 @@ angular.module('CalcNA.eqSys', ['ionic'])
   $scope.calc = function() {
     var n = parseInt(localStorage.matrixSize);
     var a = getMat(n);
-    for (var k = 1; k < n; k++) {
-      for (var i = k; i < n; i++) {
+    for (var k = 0; k < n-1 ; k++) {
+      for (var i = k+1; i < n; i++) {
         if (a[i][i] != 0) {
           var mult = a[i][k] / a[k][k]
-          for (var j = 0; j <= n; j++) {
-            a[i][j] -= mult * a[k][j]
+          for (var j = k; j < n+1; j++) {
+            a[i][j] -= mult * a[k][j];
           }
         } else {
           alert("There's a zero in the diagonal, try another method.")
