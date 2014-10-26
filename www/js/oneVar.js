@@ -73,7 +73,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
         $scope.data.root = x1;
       } else {
         if (fx0 * fx1 < 0) {
-          $scope.data.root = "(" + format1(x0) + ", " + format1(x2) + ")";
+          $scope.data.root = "(" + format1(x0) + ", " + format1(x1) + ")";
         } else {
           $scope.data.root = "Failure after " + nIter + " iterations.";
         }
@@ -149,15 +149,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
           var counter = 1;
           var error = tol + 1;
           $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([
-            math.format(xi, {
-            precision: 14
-          }), math.format(xs ,{
-            precision: 14
-          }), math.format(xm ,{
-            precision: 14
-          }), fxm, error]);
-          //$scope.data.rows.push([xi, xs, xm, fxm, error]);
+          $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
           while ((error > tol) && (fxm != 0) && (counter < nIter)) {
             if (fxi * fxm < 0) {
               xs = xm;
@@ -177,13 +169,13 @@ angular.module('CalcNA.oneVar', ['ionic'])
             });
             error = Math.abs(xm - xaux);
             counter++;
-            $scope.data.rows.push([xi, xs, xm, fxm, error]);
+            $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
           }
           if (fxm === 0) {
             $scope.data.root = xm;
           } else {
             if (error < tol) {
-              $scope.data.root = xm + " is a root approximation with a tolerance of " + tol;
+              $scope.data.root = format1(xm) + " is a root approximation with a tolerance of " + tol;
             } else {
               $scope.data.root = "failure after" + nIter + " iterations";
             }
@@ -206,6 +198,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Bisection";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('FalsePositionCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -251,15 +256,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
           var counter = 1;
           var error = tol + 1;
           $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([
-            math.format(xi, {
-            precision: 14
-          }), math.format(xs ,{
-            precision: 14
-          }), math.format(xm ,{
-            precision: 14
-          }), fxm, error]);
-          //$scope.data.rows.push([xi, xs, xm, fxm, error]);
+          $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
           while ((error > tol) && (fxm != 0) && (counter < nIter)) {
             if (fxi * fxm < 0) {
               xs = xm;
@@ -279,13 +276,13 @@ angular.module('CalcNA.oneVar', ['ionic'])
             });
             error = Math.abs(xm - xaux);
             counter++;
-            $scope.data.rows.push([xi, xs, xm, fxm, error]);
+            $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
           }
           if (fxm === 0) {
             $scope.data.root = xm;
           } else {
             if (error < tol) {
-              $scope.data.root = xm + " is a root approximation with a tolerance of " + tol;
+              $scope.data.root = format1(xm) + " is a root approximation with a tolerance of " + tol;
             } else {
               $scope.data.root = "failure after" + nIter + " iterations";
             }
@@ -309,6 +306,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "False Position";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('FixedPointCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -348,7 +358,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
     var count = 0;
 
     $scope.data.headers = ["Xn", "f(Xn)", "Error"];
-    $scope.data.rows.push([x0, fx0, error]);
+    $scope.data.rows.push([format1(x0), format2(fx0), format2(error)]);
 
     while ((fx0 != 0) && (error > tol) && (count < nIter)) {
       var xn = g.eval({
@@ -360,19 +370,13 @@ angular.module('CalcNA.oneVar', ['ionic'])
       error = Math.abs(xn - x0);
       x0 = xn;
       count++;
-      $scope.data.rows.push([
-        math.format(x0, {
-        precision: 14
-      }), math.format(fx0 ,{
-        precision: 14
-      }), error]);
-      $scope.data.rows.push([x0, fx0, error]);
+      $scope.data.rows.push([format1(x0), format2(fx0), format2(error)]);
     }
     if (fx0 === 0) {
       $scope.data.root = x0;
     } else {
       if (error < tol) {
-        $scope.data.root = "Root aproximation at " + x0 + " with a tolerance of " + tol;
+        $scope.data.root = "Root aproximation at " + format1(x0) + " with a tolerance of " + tol;
       } else {
         $scope.data.root = "Failure after " + nIter + " iterations.";
       }
@@ -391,6 +395,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Fixed Point";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('NewtontCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -433,15 +450,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
     var count = 0;
 
     $scope.data.headers = ["Xn", "f(Xn)", "f'(Xn)", "Error"];
-    $scope.data.rows.push([
-      math.format(x0, {
-      precision: 14
-    }), math.format(fx0 ,{
-      precision: 14
-    }), math.format(dfx0 ,{
-      precision: 14
-    }), error]);
-    $scope.data.rows.push([x0, fx0, dfx0, error]);
+    $scope.data.rows.push([format1(x0), format2(fx0), format2(dfx0), format2(error)]);
 
     while ((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
       var xn = x0 - fx0 / dfx0;
@@ -454,13 +463,13 @@ angular.module('CalcNA.oneVar', ['ionic'])
       error = Math.abs(xn - x0);
       x0 = xn;
       count++;
-      $scope.data.rows.push([xn, fx0, dfx0, error]);
+      $scope.data.rows.push([format1(x0), format2(fx0), format2(dfx0), format2(error)]);
     }
     if (fx0 === 0) {
       $scope.data.root = x0;
     } else {
       if (error < tol) {
-        $scope.data.root = "Root approximation at " + x0 + " with a tolerance of " + tol;
+        $scope.data.root = "Root approximation at " + format1(x0) + " with a tolerance of " + tol;
       } else {
         if (dfx0 === 0) {
           $scope.data.root = xn + " may be a multiple root.";
@@ -483,6 +492,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Newton";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('SecantCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -524,8 +546,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
       var den = fx1 - fx0;
 
       $scope.data.headers = ["Xn", "f(Xn)", "Error"];
-      $scope.data.rows.push([x0, fx0, ""]);
-      $scope.data.rows.push([x1, fx1, error]);
+      $scope.data.rows.push([format1(x1), format2(fx1), format2(error)]);
 
       while ((error > tol) && (fx1 != 0) && (den != 0) && (count < nIter)) {
         var x2 = x1 - (fx1 * (x1 - x0) / den);
@@ -538,14 +559,14 @@ angular.module('CalcNA.oneVar', ['ionic'])
         });
         den = fx1 - fx0;
         count++;
-        $scope.data.rows.push([x1, fx1, error]);
+        $scope.data.rows.push([format1(x1), format2(fx1), format2(error)]);
       }
 
       if (fx1 === 0) {
         $scope.data.root = x1;
       } else {
         if (error < tol) {
-          $scope.data.root = "Root approximation at " + x1 + " with a tolerance of " + tol;
+          $scope.data.root = "Root approximation at " + format1(x1) + " with a tolerance of " + tol;
         } else {
           if (den === 0) {
             $scope.data.root = "Posible multiple root";
@@ -569,6 +590,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Secant";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('MultRootsCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -623,7 +657,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
     var den = (f1x0 * f1x0) - (fx0 * f2x0);
 
     $scope.data.headers = ["Xn", "f(Xn)", "f'(Xn)", "f''(Xn)", "Error"];
-    $scope.data.rows.push([x0, fx0, f1x0, f2x0, error]);
+    $scope.data.rows.push([format1(x0), format2(fx0), format2(f1x0), format2(f2x0), format2(error)]);
 
     while ((error > tol) && (fx0 != 0) && (den != 0) && (count < nIter)) {
       var xn = x0 - ((fx0 * f1x0) / den);
@@ -640,13 +674,13 @@ angular.module('CalcNA.oneVar', ['ionic'])
       x0 = xn;
       den = (f1x0 * f1x0) - (fx0 * f2x0);
       count++;
-      $scope.data.rows.push([xn, fx0, f1x0, f2x0, error]);
+      $scope.data.rows.push([format1(x0), format2(fx0), format2(f1x0), format2(f2x0), format2(error)]);
     }
     if (fx0 === 0) {
       $scope.data.root = x0;
     } else {
       if (error < tol) {
-        $scope.data.root = "Root approximation at " + x0 + " with a tolerance of " + tol;
+        $scope.data.root = "Root approximation at " + format1(x0) + " with a tolerance of " + tol;
       } else {
         if (den === 0) {
           $scope.data.root = "Posible multiple root";
@@ -669,6 +703,19 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.back = function() {
     $scope.modal.hide();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Multiple roots";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 });
 
 function format1(number) {
