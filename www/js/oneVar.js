@@ -91,7 +91,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Incremental Search";
-    $scope.helpText = "texto ayuda de incremental search";
+    $scope.helpText = "This method is used in order to find a range in which a root is found, what is done is to start at one end of the range and initial evaluate give a function intervalos increases. The result will be a range where this contained a root.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
