@@ -330,6 +330,10 @@ function pivoteoTotal(a,n,k){
   var mayor = 0;
   filaMayor = k;
   columnaMayor = k;
+  var marcas = [];
+  for(var i = 0; i<n; i++){
+    marcas[i] = i;
+  }
   for(var r=k; r<n; r++){
     for(var s=k; s<n; s++){
       if(Math.abs(a[r][s]) > mayor){
@@ -347,9 +351,10 @@ function pivoteoTotal(a,n,k){
     }
     if(columnaMayor != k){
       a = intercambioColumnas(a, columnaMayor,k,n);
-      //var marcas = intercambioMarcas(marcas, columnaMayor,k);
+      marcas = intercambioMarcas(marcas, columnaMayor,k);
     }
     return a;
+    //ACA NECESITAMOS RETORNAR MARCAR TAMBIEN
   }
 }
 
@@ -386,6 +391,13 @@ function intercambioColumnas(a, columnaMayor, k, n){
     a[i][columnaMayor] = aux;
   }
   return a;
+}
+
+function intercambioMarcas(marcas, columnaMayor,k){
+  aux = marcas[k];
+  marcas[k] = marcas[columnaMayor];
+  marcas[columnaMayor] = aux;
+  return marcas;
 }
 
 function format1(number) {
