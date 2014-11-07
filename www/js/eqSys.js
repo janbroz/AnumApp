@@ -230,7 +230,6 @@ angular.module('CalcNA.eqSys', ['ionic'])
     $scope.etapas[k] = JSON.parse(JSON.stringify(a));
   }
   $scope.result = regresiveSustitution(a,n);
-  console.log($scope.result);
 
   $scope.help = function() {
     $scope.methodName = "Gaussian Elimination Partial pivoting";
@@ -249,7 +248,39 @@ angular.module('CalcNA.eqSys', ['ionic'])
   }
 })
 
-.controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal) {
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMat(n);
+  var mutiplicador = 0;
+  $scope.etapas = [];
+  for(var k=0; k<n-1; k++){
+    a = pivoteoTotal(a,n,k);
+    for(var i=k+1; i<n; i++){
+      multiplicador = a[i][k]/a[k][k];
+      for(var j=k; j<n+1; j++){
+        a[i][j] = a[i][j] - multiplicador * a[k][j];
+      }
+    }
+    $scope.etapas[k] = JSON.parse(JSON.stringify(a));
+  }
+  $scope.result = regresiveSustitution(a,n);
+
+  $scope.help = function() {
+    $scope.methodName = "Gaussian Elimination Partial pivoting";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
+  $scope.back = function() {
+    $scope.modal.hide();
+  }
+})
 
 .controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
@@ -280,8 +311,8 @@ function pivoteoParcial(a, n, k){
   var mayor = a[k][k];
   var filaMayor = k;
   for(var s=k+1; s < n ; s++){
-    if(Math.abs(a[s][k]) > Math.abs(mayor)){
-      mayor = a[s][k];
+    if(Math.abs(a[s][k]) > mayor){
+      mayor = Math.abs(a[s][k]);
       filaMayor = s;
     }
   }
@@ -290,6 +321,33 @@ function pivoteoParcial(a, n, k){
   }else{
     if(filaMayor != k){
       a = intercambioFilas(a, filaMayor, k, n);
+    }
+    return a;
+  }
+}
+
+function pivoteoTotal(a,n,k){
+  var mayor = 0;
+  filaMayor = k;
+  columnaMayor = k;
+  for(var r=k; r<n; r++){
+    for(var s=k; s<n; s++){
+      if(Math.abs(a[r][s]) > mayor){
+        mayor = Math.abs(a[r][s]);
+        filaMayor = r;
+        columnaMayor = s;
+      }
+    }
+  }
+  if(mayor = 0){
+    alert("Not unic solution");
+  }else{
+    if(filaMayor != k){
+      a = intercambioFilas(a,filaMayor,k,n);
+    }
+    if(columnaMayor != k){
+      a = intercambioColumnas(a, columnaMayor,k,n);
+      //var marcas = intercambioMarcas(marcas, columnaMayor,k);
     }
     return a;
   }
@@ -321,6 +379,14 @@ function intercambioFilas(a, filaMayor, k, n){
   return a;
 }
 
+function intercambioColumnas(a, columnaMayor, k, n){
+  for(var i=0;i<n;i++){
+    aux = a[i][k];
+    a[i][k] = a[i][columnaMayor];
+    a[i][columnaMayor] = aux;
+  }
+  return a;
+}
 
 function format1(number) {
   return math.format(number,
