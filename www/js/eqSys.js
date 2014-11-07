@@ -213,7 +213,41 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
 })
 
-.controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('GeSimplePartialCtrl', function($scope, $ionicLoading, $ionicModal) {
+
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMat(n);
+  var mutiplicador = 0;
+  $scope.etapas = [];
+  for(var k=0; k<n-1; k++){
+    a = pivoteoParcial(a,n,k);
+    for(var i=k+1; i<n; i++){
+      multiplicador = a[i][k]/a[k][k];
+      for(var j=k; j<n+1; j++){
+        a[i][j] = a[i][j] - multiplicador * a[k][j];
+      }
+    }
+    $scope.etapas[k] = JSON.parse(JSON.stringify(a));
+  }
+  $scope.result = regresiveSustitution(a,n);
+  console.log($scope.result);
+
+  $scope.help = function() {
+    $scope.methodName = "Gaussian Elimination Partial pivoting";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
+  $scope.back = function() {
+    $scope.modal.hide();
+  }
+})
 
 .controller('GeSimpleTotalCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
@@ -241,6 +275,26 @@ function getMat(n) {
   }
   return mat;
 }
+
+function pivoteoParcial(a, n, k){
+  var mayor = a[k][k];
+  var filaMayor = k;
+  for(var s=k+1; s < n ; s++){
+    if(Math.abs(a[s][k]) > Math.abs(mayor)){
+      mayor = a[s][k];
+      filaMayor = s;
+    }
+  }
+  if(mayor = 0){
+    alert("Not unic solution");
+  }else{
+    if(filaMayor != k){
+      a = intercambioFilas(a, filaMayor, k, n);
+    }
+    return a;
+  }
+}
+
 function regresiveSustitution(Ab, n){
   var x = new Array(n);
   var result = "";
@@ -252,14 +306,21 @@ function regresiveSustitution(Ab, n){
     }
     x[i] = (Ab[i][n]-acum)/Ab[i][i];
   }
-
-
-
   for(var i=0; i<n; i++){
       result += "X" + i + "= " + format1(x[i]) + " ";
   }
   return result;
 }
+
+function intercambioFilas(a, filaMayor, k, n){
+  for(var i=0;i<=n;i++){
+    aux = a[k][i];
+    a[k][i] = a[filaMayor][i];
+    a[filaMayor][i] = aux;
+  }
+  return a;
+}
+
 
 function format1(number) {
   return math.format(number,
