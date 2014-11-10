@@ -382,15 +382,15 @@ function regresiveSustitution(Ab, n){
 }
 
 function progresiveSustitution(Ab, n){
-  var x = new Array(n);
+  var x= new Array(n);
   var result = "";
-  x[n-1] = Ab[n-1][n] / Ab[n-1][n-1];
-  for(var i = n-1 ; i >= 0; i--){
-    var acum = 0;
-    for(var p = i+1 ; p < n; p++ ){
-      acum += Ab[i][p]*x[p];
-    }
-    x[i] = (Ab[i][n]-acum)/Ab[i][i];
+  x[0] = Ab[0][n] /Ab[0][0] ;
+  for(var i = 1; i <= n; i++){
+      var sum = 0;
+      for(var p = 0; p < i; p++){
+          sum += Ab[i][p]*x[p];
+      }
+      x[i]= (Ab[i][n]-sum)/Ab[i][i];
   }
   for(var i=0; i<n; i++){
       result += "X" + i + "= " + format1(x[i]) + " ";
