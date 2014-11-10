@@ -285,16 +285,60 @@ angular.module('CalcNA.eqSys', ['ionic'])
 .controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
 .controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {
-
   var n = parseInt(localStorage.matrixSize);
-  var a = getMat(n);
-  var LU = cholesky(a);
-
+  var a = getMatrix();
+  var result = cholesky(a);
+  var L = result.l;
+  var U = result.u;
+  var b = getB(n);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i][n] = b[i];
+  }
+  var z = progresiveSustitutionArray(L , n);
+  for(var i = 0 ; i <U.length ; i++){
+    U[i][n] = z[i];
+  }
+  console.log(U);
+  var x = regresiveSustitution(U , n);
+  console.log(x);
 })
 
-.controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMatrix();
+  var result = crout(a);
+  var L = result.l;
+  var U = result.u;
+  var b = getB(n);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i][n] = b[i];
+  }
+  var z = progresiveSustitutionArray(L , n);
+  for(var i = 0 ; i <U.length ; i++){
+    U[i][n] = z[i];
+  }
+  var x = regresiveSustitution(U , n);
+  console.log(x);
+})
 
-.controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal) {
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMatrix();
+  var result = doolittle(a);
+  var L = result.l;
+  var U = result.u;
+  var b = getB(n);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i][n] = b[i];
+  }
+  console.log(L);
+  var z = progresiveSustitutionArray(L , n);
+  for(var i = 0 ; i <U.length ; i++){
+    U[i][n] = z[i];
+  }
+  var x = regresiveSustitution(U , n);
+  console.log(x);
+})
 
 .controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
@@ -313,6 +357,13 @@ function getMat(n) {
   return mat;
 }
 
+function getB(n) {
+  var row =[];
+  for (var i = 0; i < n; i++) {
+    row.push(parseFloat(localStorage.getItem("b" + i)));
+  }
+  return row;
+}
 function pivoteoParcial(a, n, k){
   var mayor = a[k][k];
   var filaMayor = k;
@@ -393,9 +444,21 @@ function progresiveSustitution(Ab, n){
       x[i]= (Ab[i][n]-sum)/Ab[i][i];
   }
   for(var i=0; i<n; i++){
-      result += "X" + i + "= " + format1(x[i]) + " ";
+      result += "Z" + i + "= " + format1(x[i]) + " ";
   }
   return result;
+}
+function progresiveSustitutionArray(Ab, n){
+  var x= new Array(n);
+  x[0] = Ab[0][n] /Ab[0][0] ;
+  for(var i = 1; i < n; i++){
+      var sum = 0;
+      for(var p = 0; p < i; p++){
+          sum += Ab[i][p]*x[p];
+      }
+      x[i]= (Ab[i][n]-sum)/Ab[i][i];
+  }
+  return x;
 }
 
 function intercambioFilas(a, filaMayor, k, n){
@@ -438,4 +501,121 @@ function format2(number) {
       notation: 'exponential'
     }
   );
+}
+
+function cholesky(a){
+    var l = [];
+    var u =[];
+    var n = a.length;
+    for(var i = 0; i < a.length; i++){
+        u[i]=[];
+        l[i]=[];
+        for(var j = 0; j < n; j++){
+            l[i][j]=0;
+            u[i][j]=0;
+        }
+    }
+    for(var k = 0 ; k < n ; k++){
+        var suma1 = 0;
+        for(var p = 0 ; p <= k-1 ; p++){
+            suma1 = suma1 + l[k][p] * u[p][k];
+        }
+        u[k][k] = l[k][k] = Math.sqrt(Math.abs(a[k][k] - suma1));
+        if (suma1 > a[k][k]){
+            l[k][k]*=-1;
+        }
+        for (var j = k + 1 ; j < n ; j++) {
+            var suma3 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma3 = suma3 + l[k][p]*u[p][j];
+            }
+            u[k][j] = (a[k][j] - suma3) / l[k][k];
+        }
+        for (var i = k + 1 ; i < n ; i++) {
+            var suma2 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma2 = suma2 + l[i][p]*u[p][k];
+            }
+            l[i][k] = (a[i][k] - suma2) / u[k][k];
+        }
+    }
+    var LU={l:l,u:u}
+    return LU;
+}
+
+function doolittle(a){
+    var l = [];
+    var u =[];
+    var n = a.length;
+    for(var i = 0; i < a.length; i++){
+        u[i]=[];
+        l[i]=[];
+        for(var j = 0; j < n; j++){
+            l[i][j]=0;
+            u[i][j]=0;
+        }
+        l[i][i]=1;
+    }
+    for(var k = 0 ; k < n ; k++){
+        var suma1 = 0;
+        for(var p = 0 ; p <= k-1 ; p++){
+            suma1 = suma1 + l[k][p] * u[p][k];
+        }
+        u[k][k] = a[k][k] - suma1;
+        for (var i = k + 1 ; i < n ; i++) {
+            var suma2 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma2 = suma2 + l[i][p]*u[p][k];
+            }
+            l[i][k] = (a[i][k] - suma2) / u[k][k];
+        }
+        for (var j = k + 1 ; j < n ; j++) {
+            var suma3 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma3 = suma3 + l[k][p]*u[p][j];
+            }
+            u[k][j] = (a[k][j] - suma3) / l[k][k];
+        }
+    }
+    var LU={l:l,u:u}
+    return LU;
+}
+
+//method aproved!! :D
+function crout(a){
+    var l = [];
+    var u =[];
+    var n = a.length;
+    for(var i = 0; i < a.length; i++){
+        u[i]=[];
+        l[i]=[];
+        for(var j = 0; j < n; j++){
+            l[i][j]=0;
+            u[i][j]=0;
+        }
+        u[i][i]=1;
+    }
+    for(var k = 0 ; k < n ; k++){
+        var suma1 = 0;
+        for(var p = 0 ; p <= k-1 ; p++){
+            suma1 = suma1 + l[k][p] * u[p][k];
+        }
+        l[k][k] = a[k][k] - suma1;
+        for (var j = k + 1 ; j < n ; j++) {
+            var suma3 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma3 = suma3 + l[k][p]*u[p][j];
+            }
+            u[k][j] = (a[k][j] - suma3) / l[k][k];
+        }
+        for (var i = k + 1 ; i < n ; i++) {
+            var suma2 = 0;
+            for (var p = 0 ; p <= k-1 ; p++) {
+                suma2 = suma2 + l[i][p]*u[p][k];
+            }
+            l[i][k] = (a[i][k] - suma2) / u[k][k]; 
+        }
+    }
+    var LU = {l : l , u : u};
+    return LU;
 }
