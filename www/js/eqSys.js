@@ -354,11 +354,28 @@ function pivoteoTotal(a,n,k){
       marcas = intercambioMarcas(marcas, columnaMayor,k);
     }
     return a;
-    //ACA NECESITAMOS RETORNAR MARCAR TAMBIEN
+    //ACA NECESITAMOS RETORNAR MARCAS TAMBIEN
   }
 }
 
 function regresiveSustitution(Ab, n){
+  var x = new Array(n);
+  var result = "";
+  x[n-1] = Ab[n-1][n] / Ab[n-1][n-1];
+  for(var i = n-1 ; i >= 0; i--){
+    var acum = 0;
+    for(var p = i+1 ; p < n; p++ ){
+      acum += Ab[i][p]*x[p];
+    }
+    x[i] = (Ab[i][n]-acum)/Ab[i][i];
+  }
+  for(var i=0; i<n; i++){
+      result += "X" + i + "= " + format1(x[i]) + " ";
+  }
+  return result;
+}
+
+function progresiveSustitution(Ab, n){
   var x = new Array(n);
   var result = "";
   x[n-1] = Ab[n-1][n] / Ab[n-1][n-1];
