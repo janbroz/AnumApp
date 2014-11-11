@@ -284,7 +284,13 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
-.controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {
+
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMat(n);
+  var LU = cholesky(a);
+
+})
 
 .controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
