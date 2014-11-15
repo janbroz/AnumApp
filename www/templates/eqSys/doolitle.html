@@ -1,4 +1,4 @@
-<ion-view title="Dolittle">
+<ion-view title="Doolittle">
   <ion-nav-buttons side="left">
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
@@ -12,9 +12,14 @@
       </div>
     </div>
     <div>
-      <div class="card" ng-repeat="k in etapas track by $index">
-        <p>Stage {{$index +1}} :</p>
-        <div class="row" ng-repeat="row in k track by $index">
+      <div class="card">
+        <p>L :</p>
+        <div class="row" ng-repeat="fila in l track by $index">
+          <div class="col" ng-repeat="elemento in fila track by $index">{{elemento}}</div>
+        </div>
+        <br>
+        <p>U :</p>
+        <div class="row" ng-repeat="row in u track by $index">
           <div class="col" ng-repeat="col in row track by $index">{{col}}</div>
         </div>
       </div>

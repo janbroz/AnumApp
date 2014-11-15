@@ -301,6 +301,10 @@ angular.module('CalcNA.eqSys', ['ionic'])
     U[i][n] = z[i];
   }
   $scope.result = regresiveSustitution(U , n);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i].pop();
+    U[i].pop();
+  }
 })
 
 .controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -318,7 +322,10 @@ angular.module('CalcNA.eqSys', ['ionic'])
     U[i][n] = z[i];
   }
   var x = regresiveSustitution(U , n);
-  console.log(x);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i].pop();
+    U[i].pop();
+  }
 })
 
 .controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -331,13 +338,15 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for(var i  = 0 ; i < L.length ; i++){
     L[i][n] = b[i];
   }
-  console.log(L);
   var z = progresiveSustitutionArray(L , n);
   for(var i = 0 ; i <U.length ; i++){
     U[i][n] = z[i];
   }
   var x = regresiveSustitution(U , n);
-  console.log(x);
+  for(var i  = 0 ; i < L.length ; i++){
+    L[i].pop();
+    U[i].pop();
+  }
 })
 
 .controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {
