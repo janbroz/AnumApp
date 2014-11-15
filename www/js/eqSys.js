@@ -163,7 +163,6 @@ angular.module('CalcNA.eqSys', ['ionic'])
     }
   }
 
-
   $scope.store = function() {
     for (var i = 0; i < $scope.matrix.length; i++) {
       for (var j = 0; j < $scope.matrix[0].length; j++) {
@@ -285,11 +284,14 @@ angular.module('CalcNA.eqSys', ['ionic'])
 .controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
 
 .controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {
+  $scope.etapas = [];
   var n = parseInt(localStorage.matrixSize);
   var a = getMatrix();
   var result = cholesky(a);
   var L = result.l;
   var U = result.u;
+  $scope.l = L;
+  $scope.u = U;
   var b = getB(n);
   for(var i  = 0 ; i < L.length ; i++){
     L[i][n] = b[i];
@@ -298,9 +300,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for(var i = 0 ; i <U.length ; i++){
     U[i][n] = z[i];
   }
-  console.log(U);
-  var x = regresiveSustitution(U , n);
-  console.log(x);
+  $scope.result = regresiveSustitution(U , n);
 })
 
 .controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -340,9 +340,17 @@ angular.module('CalcNA.eqSys', ['ionic'])
   console.log(x);
 })
 
-.controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {
 
-.controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {});
+
+
+})
+
+.controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {
+
+
+
+});
 
 function getMat(n) {
   var mat = [];
@@ -613,7 +621,7 @@ function crout(a){
             for (var p = 0 ; p <= k-1 ; p++) {
                 suma2 = suma2 + l[i][p]*u[p][k];
             }
-            l[i][k] = (a[i][k] - suma2) / u[k][k]; 
+            l[i][k] = (a[i][k] - suma2) / u[k][k];
         }
     }
     var LU = {l : l , u : u};
