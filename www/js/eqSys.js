@@ -281,7 +281,34 @@ angular.module('CalcNA.eqSys', ['ionic'])
   }
 })
 
-.controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {})
+.controller('GeSimpleStepCtrl', function($scope, $ionicLoading, $ionicModal) {
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMat(n);
+  var mutiplicador = 0;
+  $scope.etapas = [];
+  for(var k=0; k<n-1; k++){
+    a = pivoteoParcialEscalonado(a,n,k);
+    for(var i=k+1; i<n; i++){
+      multiplicador = a[i][k]/a[k][k];
+      for(var j=k; j<n+1; j++){
+        a[i][j] = a[i][j] - multiplicador * a[k][j];
+      }
+    }
+    $scope.etapas[k] = JSON.parse(JSON.stringify(a));
+  }
+  $scope.result = regresiveSustitution(a,n);
+
+  $scope.help = function() {
+    $scope.methodName = "Gaussian Elimination Partial pivoting";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+})
 
 .controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {
   $scope.etapas = [];
@@ -382,6 +409,25 @@ function getB(n) {
   return row;
 }
 function pivoteoParcial(a, n, k){
+  var mayor = a[k][k];
+  var filaMayor = k;
+  for(var s=k+1; s < n ; s++){
+    if(Math.abs(a[s][k]) > mayor){
+      mayor = Math.abs(a[s][k]);
+      filaMayor = s;
+    }
+  }
+  if(mayor = 0){
+    alert("Not unic solution");
+  }else{
+    if(filaMayor != k){
+      a = intercambioFilas(a, filaMayor, k, n);
+    }
+    return a;
+  }
+}
+
+function pivoteoParcialEscalonado(a, n, k){
   var mayor = a[k][k];
   var filaMayor = k;
   for(var s=k+1; s < n ; s++){
