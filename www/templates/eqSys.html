@@ -3,38 +3,40 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <ion-item class="item-stable" ng-click="showPopup()">
-      Insert Matrix
-    </ion-item>
-    <ion-item class="item-stable"
-              ng-click="toggleGroup(1)"
-              ng-class="{active: isGroupShown(1)}">
-      Direct Methods
-    </ion-item>
-      <ion-item class="item-accordion"
-                ng-show="isGroupShown(1)"
-                ng-click="gePopup()">
-        Simple Gaussian Elimination
+    <ion-list>
+      <ion-item class="item-stable" ng-click="showPopup()">
+        Insert Matrix
       </ion-item>
-      <ion-item class="item-accordion"
-                ng-show="isGroupShown(1)"
-                ng-click="luPopup()">
-        LU Factorization
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(1)"
+                ng-class="{active: isGroupShown(1)}">
+        Direct Methods
       </ion-item>
-    <ion-item class="item-stable"
-              ng-click="toggleGroup(2)"
-              ng-class="{active: isGroupShown(2)}">
-      Iterative Methods
-    </ion-item>
-      <ion-item class="item-accordion"
-                ng-show="isGroupShown(2)"
-                href="#/app/gaussSeidel">
-        Gauss Seidel
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(1)"
+                  ng-click="gePopup()">
+          Simple Gaussian Elimination
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(1)"
+                  ng-click="luPopup()">
+          LU Factorization
+        </ion-item>
+      <ion-item class="item-stable"
+                ng-click="toggleGroup(2)"
+                ng-class="{active: isGroupShown(2)}">
+        Iterative Methods
       </ion-item>
-      <ion-item class="item-accordion"
-                ng-show="isGroupShown(2)"
-                href="#/app/jacobi">
-        Jacobi
-      </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/gaussSeidel">
+          Gauss Seidel
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(2)"
+                  href="#/app/jacobi">
+          Jacobi
+        </ion-item>
+      </ion-list>
   </ion-content>
 </ion-view>
