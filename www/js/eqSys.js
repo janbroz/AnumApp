@@ -189,14 +189,13 @@ angular.module('CalcNA.eqSys', ['ionic'])
         alert("There's a zero in the diagonal, try another method.")
       }
     }
-    // serializa y deserializa la matriz para un deep copy
     $scope.etapas[k] = JSON.parse(JSON.stringify(a));
   }
   $scope.result = regresiveSustitution(a,n);
 
   $scope.help = function() {
     $scope.methodName = "Simple Gaussian Elimination";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Consists in generating the augmented matrix and then get a triangular upper matrix with elementary row operations; it has two phases: elimination of the unknowns and get the solution by back-substitution. The disadvantage of this method is that the rounding error is generated because the fractions are represented as decimal numbers, also it may occur a division by zero in the elimination phase. There are two cases where the Gaussian elimination without pivoting can be done: when the matrix is diagonally dominant and symmetric positive.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -232,7 +231,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Gaussian Elimination Partial pivoting";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Consists in selecting an item of the same column that is below the diagonal and has the biggest absolute value and reordering the rows on the matrix to get the max value of a coefficient on the main diagonal in order to reduce the effects of rounding errors. Partial pivoting is used because the rounding errors must be avoided; this should be obtained by converting the matrix A into a higher diagonal system. This row change is used to avoid problems such as division by zero";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -265,8 +264,8 @@ angular.module('CalcNA.eqSys', ['ionic'])
   $scope.result = regresiveSustitution(a,n);
 
   $scope.help = function() {
-    $scope.methodName = "Gaussian Elimination Partial pivoting";
-    $scope.helpText = "texto ayuda";
+    $scope.methodName = "Gaussian Elimination Total pivoting";
+    $scope.helpText = "Rows and columns are exchanged to put the greatest numbers in the main diagonal; this change affects the order of the solutions. When the matrix is converted, the values of x can be found using back substitution.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -299,7 +298,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
   $scope.result = regresiveSustitution(a,n);
 
   $scope.help = function() {
-    $scope.methodName = "Gaussian Elimination Partial pivoting";
+    $scope.methodName = "Gaussian Elimination Step pivoting";
     $scope.helpText = "texto ayuda";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
@@ -336,7 +335,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Cholesky LU";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Exposes that the Uii elements of the U matrix are equal to the Lii elements of the L matrix. This method applies to the L*U factorization only. L is lower triangular with positive diagonal terms not necessarily unitary.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -370,7 +369,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Crout LU";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Symmetric matrices. Exposes that the Uii elements of the U matrix are equal to 1. This method applies to the L*U factorization only. L is lower triangular. U is upper triangular with unit diagonal. This method finds a column of L and then a row of U, and assumes that the main diagonal of U is formed by 1.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -404,7 +403,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Dolittle LU";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Regular matrices. Exposes that the Lii elements of the L matrix are equal to 1. This method applies to the L*U factorization only. L is lower triangular with unit diagonal. U is upper triangular. This method obtains the U elements by rows and the L elements by columns. It is necessary to calculate a row of U, then a column of L, until L and U are complete. Doolittle considers 1 on the main diagonal of L";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -452,7 +451,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Gauss Seidel";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "Is a method that can be applied to any system of linear equations represented in a matrix of coefficients. In the Gauss-Seidel method, the improved values ​​are used as soon as they are obtained; the convergence of the method can be guaranteed if the matrix (A) is diagonally dominant or symmetrical.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -492,7 +491,7 @@ function jacobi(a,b,tol,x){
 }
 
   $scope.help = function() {
-    $scope.methodName = "Jacobi";
+    $scope.methodName = "It is based on an iterative formula, which starts with an initial value to generate a sequence that converges to X. This method needs a stop criterion that can be the difference between the Xn and Xn-1 approximations in absolute value or with the Euclidean norm. If A is strictly diagonally dominant, the Jacobi method converges for any initial value.";
     $scope.helpText = "texto ayuda";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
@@ -541,7 +540,7 @@ function jacobi(a,b,tol,x){
 
   $scope.help = function() {
     $scope.methodName = "Gauss Seidel With Relax";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "In the Gauss-Seidel method, the improved values ​​are used as soon as they are obtained; the convergence of the method can be guaranteed if the matrix (A) is diagonally dominant or symmetrical. This methods uses relaxing methods to get a better aproximation";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
