@@ -333,6 +333,19 @@ angular.module('CalcNA.eqSys', ['ionic'])
     L[i].pop();
     U[i].pop();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Cholesky LU";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('CroutCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -354,6 +367,19 @@ angular.module('CalcNA.eqSys', ['ionic'])
     L[i].pop();
     U[i].pop();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Crout LU";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('DoolitleCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -375,12 +401,26 @@ angular.module('CalcNA.eqSys', ['ionic'])
     L[i].pop();
     U[i].pop();
   }
+
+  $scope.help = function() {
+    $scope.methodName = "Dolittle LU";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {
 
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMatrix();
   function gaussSeidel(a,b,tol,x){
-    var n = a.length;
     var x1 = [];
     var itera = 0;
     for(var i = 0; i < x.length; i++){
@@ -410,6 +450,18 @@ angular.module('CalcNA.eqSys', ['ionic'])
     console.log(dispersion);
 }
 
+  $scope.help = function() {
+    $scope.methodName = "Gauss Seidel";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
 })
 
 .controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -438,6 +490,18 @@ function jacobi(a,b,tol,x){
     }
     console.log(x);
 }
+
+  $scope.help = function() {
+    $scope.methodName = "Jacobi";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
 
 })
 
@@ -474,6 +538,18 @@ function jacobi(a,b,tol,x){
     console.log(itera);
     console.log(dispersion);
 }
+
+  $scope.help = function() {
+    $scope.methodName = "Gauss Seidel With Relax";
+    $scope.helpText = "texto ayuda";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
 
 });
 
