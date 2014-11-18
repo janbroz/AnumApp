@@ -308,6 +308,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
       $scope.modal = modal;
       modal.show();
     });
+  }
 })
 
 .controller('CholeskyCtrl', function($scope, $ionicLoading, $ionicModal) {
@@ -378,13 +379,101 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('GaussSeidelCtrl', function($scope, $ionicLoading, $ionicModal) {
 
-
+  function gaussSeidel(a,b,tol,x){
+    var n = a.length;
+    var x1 = [];
+    var itera = 0;
+    for(var i = 0; i < x.length; i++){
+        x1[i]=x[i];
+    }
+    var dispersion = tol + 1;
+    for(var k = 0; k < niter && tol<dispersion; k++){
+        itera ++;
+        for (var i = 0; i < n; i++){
+            var suma = 0;
+            for(var j = 0; j < n; j++){
+                if(j!=i){
+                    suma = suma + a[i][j]*x1[j];
+                }
+            }
+            x1[i]= (b[i]-suma)/a[i][i];
+        }
+        var sumdisp = 0;
+        for(var i = 0; i < x.length; i++){
+            sumdisp = Math.abs(x1[i]-x[i]);
+            x[i]=x1[i];
+        }
+        dispersion = sumdisp;
+    }
+    console.log(x);
+    console.log(itera);
+    console.log(dispersion);
+}
 
 })
 
 .controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {
 
+var niter = 500;
+function jacobi(a,b,tol,x){
+    var n = a.length;
+    var x1 = [];
+    var dispersion = tol + 1;
+    for(var k = 0; k < niter && tol<dispersion; k++){
+        for (var i = 0; i < n; i++){
+            var suma = 0;
+            for(var j = 0; j < n; j++){
+                if(j!=i){
+                    suma = suma + a[i][j]*x[j]
+                }
+            }
+            x1[i]= (b[i]-suma)/a[i][i];
+        }
+        var sumdisp = 0;
+        for(var i = 0; i < x.length; i++){
+            sumdisp = Math.abs(x1[i]-x[i]);
+            x[i]=x1[i];
+        }
+        dispersion = sumdisp;
+    }
+    console.log(x);
+}
 
+})
+
+.controller('GaussSeidelRelaxCtrl', function($scope, $ionicLoading, $ionicModal) {
+
+  function gaussSeidelRelajado(a,b,w,tol,x){
+    var n = a.length;
+    var x1 = [];
+    var itera = 0;
+    for(var i = 0; i < x.length; i++){
+        x1[i]=x[i];
+    }
+    var dispersion = tol + 1;
+    for(var k = 0; k < niter && tol<dispersion; k++){
+        itera ++;
+        for (var i = 0; i < n; i++){
+            var suma = 0;
+            for(var j = 0; j < n; j++){
+                if(j!=i){
+                    suma = suma + a[i][j]*x1[j];
+                }
+            }
+
+            x1[i]= ((1-w)*x1[i])+ (w*(b[i]-suma)/a[i][i]);
+        }
+        var sumdisp = 0;
+        for(var i = 0; i < x.length; i++){
+            sumdisp = Math.abs(x1[i]-x[i]);
+            x[i]=x1[i];
+        }
+        dispersion = sumdisp;
+    }
+    console.log(x);
+    console.log(itera);
+    console.log(dispersion);
+}
 
 });
 
@@ -474,7 +563,6 @@ function pivoteoTotal(a,n,k){
       marcas = intercambioMarcas(marcas, columnaMayor,k);
     }
     return a;
-    //ACA NECESITAMOS RETORNAR MARCAS TAMBIEN
   }
 }
 
