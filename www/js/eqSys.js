@@ -491,8 +491,8 @@ function jacobi(a,b,tol,x){
 }
 
   $scope.help = function() {
-    $scope.methodName = "It is based on an iterative formula, which starts with an initial value to generate a sequence that converges to X. This method needs a stop criterion that can be the difference between the Xn and Xn-1 approximations in absolute value or with the Euclidean norm. If A is strictly diagonally dominant, the Jacobi method converges for any initial value.";
-    $scope.helpText = "texto ayuda";
+    $scope.methodName = "Jacobi";
+    $scope.helpText = "It is based on an iterative formula, which starts with an initial value to generate a sequence that converges to X. This method needs a stop criterion that can be the difference between the Xn and Xn-1 approximations in absolute value or with the Euclidean norm. If A is strictly diagonally dominant, the Jacobi method converges for any initial value.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -523,7 +523,6 @@ function jacobi(a,b,tol,x){
                     suma = suma + a[i][j]*x1[j];
                 }
             }
-
             x1[i]= ((1-w)*x1[i])+ (w*(b[i]-suma)/a[i][i]);
         }
         var sumdisp = 0;
