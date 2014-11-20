@@ -193,7 +193,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Bisection";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "The method involves dividing the interval in which we know there is a root in two equal subintervals of equal size, with the signs of the values ​​corresponding to the evaluation of the function at the endpoints, we find the mean value and look in which segment is the root, and what we do is to make this process for each segment is divided, to find the root, or an approximation to it. ";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -297,7 +297,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "False Position";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "This method is essentially the same as the bisection, the only difference that occurs is that in this approach the middle point is not calculated by halving the interval but is calculated by drawing a line from each point in the range evaluated in function to the other end of the range also evaluated in the function, the point where it intersects the x axis is then the midpoint. This method converges faster than bisection, in fewer iterations. Input Data: Interval with root, absolute error (error tolerance)";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -382,7 +382,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Fixed Point";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "he fixed point method is an iterative method for solving systems of linear equations not necessarily. In particular it can be used to determine roots of a function of the form f (x), as long as the convergence criteria are met. ";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -475,7 +475,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Newton";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "This method uses an initial guess to start the iterative process. Basically operates evaluated at the initial point function and derivative function creating a tangent line extending to cut the x-axis at this point where it cuts the axis of the second value to replace the initial approach is taken and conduct the same process over and over until closer and closer to the root of the function. ";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -569,7 +569,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Secant";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "This method is very similar to the method of 'False Rule,' the initial two approaches found in the function and draw a secant line between corresponding points of the function, the secant line intersects the x axis at a point p to determine us new value approach. Based on this new value and the previous re-evaluated the function at these two points and a new secant line crossing the axis again and again takes approximate value is plotted, this process is iterated until coming increasingly to the root . ";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -678,7 +678,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Multiple roots";
-    $scope.helpText = "texto ayuda";
+    $scope.helpText = "One of the drawbacks of the Newton method is when the derivative of the function tends to zero when evaluated at x and hence the convergence slows down or even stopped if a division by zero is reached. Similarly happen with the secant method if the function is very flat and f (x) and f (x-1) are approximately equal. In order to give solution to this drawback of these methods were developed to determine multiple roots.Method PseudoCode";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
