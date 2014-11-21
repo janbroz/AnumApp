@@ -323,6 +323,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for(var i  = 0 ; i < L.length ; i++){
     L[i][n] = b[i];
   }
+
   var z = progresiveSustitutionArray(L , n);
   for(var i = 0 ; i <U.length ; i++){
     U[i][n] = z[i];
@@ -353,7 +354,10 @@ angular.module('CalcNA.eqSys', ['ionic'])
   var result = crout(a);
   var L = result.l;
   var U = result.u;
+  $scope.l = L;
+  $scope.u = U;
   var b = getB(n);
+
   for(var i  = 0 ; i < L.length ; i++){
     L[i][n] = b[i];
   }
@@ -361,7 +365,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for(var i = 0 ; i <U.length ; i++){
     U[i][n] = z[i];
   }
-  var x = regresiveSustitution(U , n);
+  $scope.result = regresiveSustitution(U , n);
   for(var i  = 0 ; i < L.length ; i++){
     L[i].pop();
     U[i].pop();
@@ -387,6 +391,8 @@ angular.module('CalcNA.eqSys', ['ionic'])
   var result = doolittle(a);
   var L = result.l;
   var U = result.u;
+  $scope.l = L;
+  $scope.u = U;
   var b = getB(n);
   for(var i  = 0 ; i < L.length ; i++){
     L[i][n] = b[i];
@@ -395,7 +401,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for(var i = 0 ; i <U.length ; i++){
     U[i][n] = z[i];
   }
-  var x = regresiveSustitution(U , n);
+  $scope.result = regresiveSustitution(U , n);
   for(var i  = 0 ; i < L.length ; i++){
     L[i].pop();
     U[i].pop();
