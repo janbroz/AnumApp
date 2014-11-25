@@ -8,7 +8,7 @@
   <ion-content class="has-header">
     <div class="card">
       <div class="item item-text-wrap">
-        <p ng-repeat="val in result">x{{$index+1}}: {{val}}</p>
+        <p ng-repeat="val in result track by $index">x{{$index+1}}: {{val}}</p>
       </div>
     </div>
     <div class="card">
