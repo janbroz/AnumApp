@@ -25,7 +25,7 @@ function getVector() {
 
 angular.module('CalcNA.eqSys', ['ionic'])
 
-.controller('EqSysCtrl', function($scope, $state, $ionicPopup) {
+.controller('EqSysCtrl', function($scope, $state, $ionicPopup, $ionicModal) {
   $scope.input = {};
   $scope.showPopup = function() {
     $scope.data = {}
@@ -136,6 +136,41 @@ angular.module('CalcNA.eqSys', ['ionic'])
           break;
       }
     });
+  }
+  $scope.b = getVector();
+  $ionicModal.fromTemplateUrl('templates/eqSys/gsModal.html',
+  function($ionicModal) {
+        $scope.modalGS = $ionicModal;
+    }, {
+      scope: $scope,
+      animation: 'slide-in-up'
+    });
+  $ionicModal.fromTemplateUrl('templates/eqSys/jacobiModal.html',
+  function($ionicModal) {
+        $scope.modalJacobi = $ionicModal;
+    }, {
+      scope: $scope,
+      animation: 'slide-in-up'
+    });
+  $scope.goto = function(i) {
+    var params = {
+      iterations: $scope.input.iterations,
+      tolerance: $scope.input.tolerance,
+      xi: $scope.input.xi
+    }
+    localStorage.params = JSON.stringify(params);
+    switch (i) {
+      case 0:
+        $scope.modalGS.hide();
+        $state.go('app.gaussSeidel');
+        break;
+      case 1:
+        $scope.modalJacobi.hide();
+        $state.go('app.jacobi');
+        break;
+      default:
+        break;
+    }
   }
   $scope.toggleGroup = function(group) {
     if ($scope.isGroupShown(group)) {
@@ -425,35 +460,59 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
   var n = parseInt(localStorage.matrixSize);
   var a = getMatrix();
-  function gaussSeidel(a,b,tol,x){
-    var x1 = [];
-    var itera = 0;
-    for(var i = 0; i < x.length; i++){
-        x1[i]=x[i];
-    }
-    var dispersion = tol + 1;
-    for(var k = 0; k < niter && tol<dispersion; k++){
-        itera ++;
-        for (var i = 0; i < n; i++){
-            var suma = 0;
-            for(var j = 0; j < n; j++){
-                if(j!=i){
-                    suma = suma + a[i][j]*x1[j];
-                }
-            }
-            x1[i]= (b[i]-suma)/a[i][i];
-        }
-        var sumdisp = 0;
-        for(var i = 0; i < x.length; i++){
-            sumdisp = Math.abs(x1[i]-x[i]);
-            x[i]=x1[i];
-        }
-        dispersion = sumdisp;
-    }
-    console.log(x);
-    console.log(itera);
-    console.log(dispersion);
-}
+  var b = getVector();
+  var params = JSON.parse(localStorage.params);
+  var niter = parseInt(params.iterations);
+  var tol = params.tolerance;
+  var x = [];
+  for(var i in params.xi) {
+    x.push(params.xi[i]);
+  }
+  var x1 = [];
+  var itera = 0;
+  for(var i = 0; i < x.length; i++){
+      x1[i]=x[i];
+  }
+  var count = 0;
+  var dispersion = tol + 1;
+  $scope.headers = ["n"];
+  for(var i in x) {
+    i++;
+    $scope.headers.push("x"+i);
+  }
+  $scope.headers.push("Norma");
+  $scope.rows = [];
+  row = [0];
+  for(var i in x) {
+    row.push(format1(x[i]));
+  }
+  row.push("-");
+  $scope.rows.push(row);
+  while(count < niter && tol<dispersion){
+      for (var i = 0; i < n; i++){
+          var suma = 0;
+          for(var j = 0; j < n; j++){
+              if(j!=i){
+                  suma = suma + a[i][j]*x1[j];
+              }
+          }
+          x1[i]= (b[i]-suma)/a[i][i];
+      }
+      var sumdisp = 0;
+      for(var i = 0; i < x.length; i++){
+          sumdisp = Math.abs(x1[i]-x[i]);
+          x[i]=x1[i];
+      }
+      dispersion = sumdisp;
+      row = [count+1];
+      for(var i in x) {
+        row.push(format1(x[i]));
+      }
+      row.push(format1(dispersion));
+      $scope.rows.push(row);
+      count ++;
+  }
+  $scope.result = x;
 
   $scope.help = function() {
     $scope.methodName = "Gauss Seidel";
@@ -470,31 +529,56 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('JacobiCtrl', function($scope, $ionicLoading, $ionicModal) {
-
-var niter = 500;
-function jacobi(a,b,tol,x){
-    var n = a.length;
-    var x1 = [];
-    var dispersion = tol + 1;
-    for(var k = 0; k < niter && tol<dispersion; k++){
-        for (var i = 0; i < n; i++){
-            var suma = 0;
-            for(var j = 0; j < n; j++){
-                if(j!=i){
-                    suma = suma + a[i][j]*x[j]
-                }
-            }
-            x1[i]= (b[i]-suma)/a[i][i];
-        }
-        var sumdisp = 0;
-        for(var i = 0; i < x.length; i++){
-            sumdisp = Math.abs(x1[i]-x[i]);
-            x[i]=x1[i];
-        }
-        dispersion = sumdisp;
-    }
-    console.log(x);
-}
+  var n = parseInt(localStorage.matrixSize);
+  var a = getMatrix();
+  var b = getVector();
+  var params = JSON.parse(localStorage.params);
+  var niter = parseInt(params.iterations);
+  var tol = params.tolerance;
+  var x = [];
+  for(var i in params.xi) {
+    x.push(params.xi[i]);
+  }
+  var n = a.length;
+  var x1 = [];
+  var dispersion = tol + 1;
+  $scope.headers = ["n"];
+  for(var i in x) {
+    i++;
+    $scope.headers.push("x"+i);
+  }
+  $scope.headers.push("Norma");
+  $scope.rows = [];
+  row = [0];
+  for(var i in x) {
+    row.push(format1(x[i]));
+  }
+  row.push("-");
+  $scope.rows.push(row);
+  for(var k = 0; k < niter && tol<dispersion; k++){
+      for (var i = 0; i < n; i++){
+          var suma = 0;
+          for(var j = 0; j < n; j++){
+              if(j!=i){
+                  suma = suma + a[i][j]*x[j]
+              }
+          }
+          x1[i]= (b[i]-suma)/a[i][i];
+      }
+      var sumdisp = 0;
+      for(var i = 0; i < x.length; i++){
+          sumdisp = Math.abs(x1[i]-x[i]);
+          x[i]=x1[i];
+      }
+      dispersion = sumdisp;
+      row = [k+1];
+      for(var i in x) {
+        row.push(format1(x[i]));
+      }
+      row.push(format1(dispersion));
+      $scope.rows.push(row);
+  }
+  $scope.result = x;
 
   $scope.help = function() {
     $scope.methodName = "Jacobi";
@@ -720,7 +804,7 @@ function intercambioMarcas(marcas, columnaMayor,k){
 function format1(number) {
   return math.format(number,
     {
-      precision: 6
+      precision: 9
     }
   );
 }
