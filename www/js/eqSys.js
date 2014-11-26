@@ -137,7 +137,7 @@ angular.module('CalcNA.eqSys', ['ionic'])
       }
     });
   }
-  $scope.b = getVector();
+  if(localStorage.matrixSize) $scope.b = getVector();
   $ionicModal.fromTemplateUrl('templates/eqSys/gsModal.html',
   function($ionicModal) {
         $scope.modalGS = $ionicModal;
