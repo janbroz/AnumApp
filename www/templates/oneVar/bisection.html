@@ -12,20 +12,24 @@
         <input type="text" placeholder="{{input.f}}" ng-model="input.f">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">N. Iterations</span>
+        <span class="input-label">Number of iterations</span>
         <input type="number" ng-model="input.nIter">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">X0</span>
+        <span class="input-label">a</span>
         <input type="number" ng-model="input.xi">
       </label>
         <label class="item item-input item-stacked-label">
-        <span class="input-label">X1</span>
+        <span class="input-label">b</span>
         <input type="number" ng-model="input.xs">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Tolerance</span>
         <input type="number" ng-model="input.tol">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Delta</span>
+        <input type="number" ng-model="input.delta">
       </label>
       <br>
       <button class="button button-block button-dark" ng-click="calc()">

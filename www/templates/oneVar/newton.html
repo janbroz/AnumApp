@@ -12,8 +12,8 @@
         <input type="text" placeholder="{{f}}" ng-model="input.f">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">G(x)</span>
-        <input type="text" placeholder="{{g}}" ng-model="input.g">
+        <span class="input-label">F'(x)</span>
+        <input type="text" placeholder="{{ff}}" ng-model="input.ff">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">N. Iterations</span>
@@ -26,6 +26,10 @@
       <label class="item item-input item-stacked-label">
         <span class="input-label">Tolerance</span>
         <input type="number" ng-model="input.tol">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Delta</span>
+        <input type="number" ng-model="input.delta">
       </label>
       <br>
       <button class="button button-block button-dark" ng-click="calc()">

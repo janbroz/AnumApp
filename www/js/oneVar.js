@@ -38,60 +38,53 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.data.rows = [];
 
   $scope.calc = function() {
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-    var f = math.compile($scope.input.f);
-    var x0 = parseFloat($scope.input.x0);
-    var delta = parseFloat($scope.input.delta);
-    var nIter = parseInt($scope.input.nIter);
-    var fx0 = f.eval({
-      x: x0
-    });
-    $scope.data.headers = ["X", "Y"];
-    if (fx0 === 0) {
-      $scope.data.root = x0;
-    } else {
-      var x1 = x0 + delta;
-      var counter = 1;
-      var fx1 = f.eval({
-        x: x1
+      $ionicLoading.show({
+	  template: 'Loading...'
       });
-      $scope.data.rows.push([format1(x0), format2(fx0)]);
-      while ((fx0 * fx1 > 0) && (counter <= nIter)) {
-        x0 = x1;
-        fx0 = fx1;
-        x1 = x0 + delta;
-        fx1 = f.eval({
-          x: x1
-        });
-        $scope.data.rows.push([format1(x0), format2(fx0)]);
-        counter++;
+      var f = math.compile($scope.input.f);
+      var xa = parseFloat($scope.input.x0);
+      var delta = parseFloat($scope.input.delta);
+      var nIter = parseInt($scope.input.nIter);
+      var fxa = f.eval({ x: xa });
+      var n = 1;
+
+      $scope.data.headers = ["a", "b"];
+      var xb = xa + delta;
+      var fxb = f.eval({ x: xb });
+
+      while (n < nIter){
+	  fxa = f.eval({ x: xa });
+	  fxb = f.eval({ x: xb });
+	  if(fxa*fxb < 0){
+	      $scope.data.rows.push([xa, xb]);
+	      xa = xb;
+	      xb = xa+delta;
+	  }
+	  else if(fxa === 0){
+	      $scope.data.root = xa;
+	      xa = xb;
+	      xb = xa + delta;
+	  }
+	  else{
+	      xa = xb;
+	      xb = xa + delta;
+	  }
+	  n++;
       }
-      $scope.data.rows.push([format1(x1), format2(fx1)]);
-      if (fx1 === 0) {
-        $scope.data.root = x1;
-      } else {
-        if (fx0 * fx1 < 0) {
-          $scope.data.root = "(" + format1(x0) + ", " + format1(x1) + ")";
-        } else {
-          $scope.data.root = "Failure after " + nIter + " iterations.";
-        }
-      }
-    }
-    $ionicLoading.hide();
-    $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-      modal.show();
-    });
+  
+      $ionicLoading.hide();
+      $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
+	  scope: $scope,
+	  animation: 'slide-in-up'
+      }).then(function(modal) {
+	  $scope.modal = modal;
+	  modal.show();
+      });
   }
 
   $scope.help = function() {
     $scope.methodName = "Incremental Search";
-    $scope.helpText = "This method is used in order to find a range in which a root is found, what is done is to start at one end of the range and initial evaluate give a function intervalos increases. The result will be a range where this contained a root.";
+    $scope.helpText = "We can use this algorithm as the base of the closed methods, because it will give us the sure interval in which at least one root is in.  When a continuous function is given, the root searching is defined by testing an initial value as the beginning of a loop, which is going to also tests every next number according to a differential value until a number of a given iterations is complete or when a root is found ( f(a) * f(b) < 0 ) .";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -116,71 +109,59 @@ angular.module('CalcNA.oneVar', ['ionic'])
     $ionicLoading.show({
       template: 'Loading...'
     });
-    var xi = parseFloat($scope.input.xi);
-    var xs = parseFloat($scope.input.xs);
-    var tol = parseFloat($scope.input.tol);
-    var nIter = parseInt($scope.input.nIter);
-    var f = math.compile($scope.input.f);
+      var xa = parseFloat($scope.input.xi);
+      var xb = parseFloat($scope.input.xs);
+      var tol = parseFloat($scope.input.tol);
+      var nIter = parseInt($scope.input.nIter);
+      var f = math.compile($scope.input.f);
+      var delta = parseFloat($scope.input.delta);  
 
-    $scope.data = {};
-    $scope.data.rows = [];
+      $scope.data = {};
+      $scope.data.rows = [];
+      $scope.data.headers = ["n", "x", "f(Xm)", "Error"];
 
-    var fxi = f.eval({
-      x: xi
-    });
-    var fxs = f.eval({
-      x: xs
-    });
-    if (fxi === 0) {
-      $scope.data.root = xi;
-    } else {
-      if (fxs === 0) {
-        $scope.data.root = xs;
-      } else {
-        if (fxi * fxs < 0) {
-          var xm = (xi + xs) / 2;
-          var fxm = f.eval({
-            x: xm
-          });
-          var counter = 1;
-          var error = tol + 1;
-          $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
-          while ((error > tol) && (fxm != 0) && (counter < nIter)) {
-            if (fxi * fxm < 0) {
-              xs = xm;
-              fxs = f.eval({
-                x: xm
-              });
-            } else {
-              xi = xm;
-              fxi = f.eval({
-                x: xm
-              });
-            }
-            var xaux = xm;
-            xm = (xi + xs) / 2;
-            fxm = f.eval({
-              x: xm
-            });
-            error = Math.abs(xm - xaux);
-            counter++;
-            $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
-          }
-          if (fxm === 0) {
-            $scope.data.root = xm;
-          } else {
-            if (error < tol) {
-              $scope.data.root = format1(xm) + " is a root approximation with a tolerance of " + tol;
-            } else {
-              $scope.data.root = "failure after" + nIter + " iterations";
-            }
-          }
-        } else {
-          $scope.data.root = "invalid interval";
-        }
+      var fxa = f.eval({ x: xa });
+      var fxb = f.eval({ x: xb });
+
+
+      if(fxa === 0){
+	  $scope.data.root = xa;
+      }else if(fxb === 0){
+	  $scope.data.root = xb;
+      }else if(fxa*fxb < 0){
+	  var c = (xa+xb)/2;
+	  var fc = f.eval({ x: c });
+	  var error = tol+1;
+	  var n = 1;	  
+	  $scope.data.rows.push([n, c, fc, error]);
+
+	  while(error>tol && fc !== 0 && n < nIter){
+	      if(fxa*fc<0){
+		  xb=c;
+		  fxb = f.eval({ x: c });
+	      }else{
+		  xa=c;
+		  fxa=f.eval({ x: c });
+	      }
+	      var xaux = c;
+	      c = (xa+xb)/2;
+	      fc = f.eval({ x: c });
+	      error = Math.abs(c - xaux);
+	      $scope.data.rows.push([n, c, fc, error]);
+	      n++;
+	  }
+	  if(fc === 0){
+	      $scope.data.root = c;
+	  }else if(error < tol){
+	      $scope.data.root = c;
+	  }else{
+	      $scope.data.root = "failure after" + nIter + " iterations";
+	  }
+      }else{
+	  $scope.data.root = "The interval is invalid";
       }
-    }
+      
+      
     $ionicLoading.hide();
     $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
       scope: $scope,
@@ -193,7 +174,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Bisection";
-    $scope.helpText = "The method involves dividing the interval in which we know there is a root in two equal subintervals of equal size, with the signs of the values ​​corresponding to the evaluation of the function at the endpoints, we find the mean value and look in which segment is the root, and what we do is to make this process for each segment is divided, to find the root, or an approximation to it. ";
+    $scope.helpText = "Starting from a given closed interval and based on a number of iterations and a tolerance (related with the function error studied in chapter I), we repeatedly bisects by sub intervals the function's graphic trying to find an approximation of where the root could be. The number of iterations and the tolerance, determinate how many times we will repeat the loop and the new extreme points of the newer interval will be defined by the signs of the former values image; at the end if it was not possible to find a root, we say the method just failed.";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -222,68 +203,61 @@ angular.module('CalcNA.oneVar', ['ionic'])
       template: 'Loading...'
     });
 
-    var xi = parseFloat($scope.input.xi);
-    var xs = parseFloat($scope.input.xs);
-    var tol = parseFloat($scope.input.tol);
-    var nIter = parseInt($scope.input.nIter);
-    var f = math.compile($scope.input.f);
 
-    var fxi = f.eval({
-      x: xi
-    });
-    var fxs = f.eval({
-      x: xs
-    });
-    if (fxi === 0) {
-      $scope.data.root = xi;
-    } else {
-      if (fxs === 0) {
-        $scope.data.root = xs;
-      } else {
-        if (fxi * fxs < 0) {
-          var xm = xi - (fxi * (xs - xi) / (fxs - fxi));
-          var fxm = f.eval({
-            x: xm
-          });
-          var counter = 1;
-          var error = tol + 1;
-          $scope.data.headers = ["Xi", "Xs", "Xm", "f(Xm)", "Error"];
-          $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
-          while ((error > tol) && (fxm != 0) && (counter < nIter)) {
-            if (fxi * fxm < 0) {
-              xs = xm;
-              fxs = f.eval({
-                x: xm
-              });
-            } else {
-              xi = xm;
-              fxi = f.eval({
-                x: xm
-              });
-            }
-            var xaux = xm;
-            xm = xi - (fxi * (xs - xi) / (fxs - fxi));
-            fxm = f.eval({
-              x: xm
-            });
-            error = Math.abs(xm - xaux);
-            counter++;
-            $scope.data.rows.push([format1(xi), format1(xs), format1(xm), format2(fxm), format2(error)]);
-          }
-          if (fxm === 0) {
-            $scope.data.root = xm;
-          } else {
-            if (error < tol) {
-              $scope.data.root = format1(xm) + " is a root approximation with a tolerance of " + tol;
-            } else {
-              $scope.data.root = "failure after" + nIter + " iterations";
-            }
-          }
-        } else {
-          $scope.data.root = "invalid interval";
-        }
+      var xa = parseFloat($scope.input.xi);
+      var xb = parseFloat($scope.input.xs);
+      var tol = parseFloat($scope.input.tol);
+      var nIter = parseInt($scope.input.nIter);
+      var f = math.compile($scope.input.f);
+      var delta = parseFloat($scope.input.delta);  
+
+      $scope.data = {};
+      $scope.data.rows = [];
+      $scope.data.headers = ["n", "Xm", "f(Xm)", "Error"];
+
+      var fxa = f.eval({ x: xa });
+      var fxb = f.eval({ x: xb });
+
+
+      if(fxa === 0){
+	  $scope.data.root = xa+" is a root";
+      }else if(fxb === 0){
+	  $scope.data.root = xb+" is a root";
+      }else if(fxa*fxb < 0){
+	  var c = a - (fxa *(xb-xa)/(fxb-fxa));
+	  var fc = f.eval({ x: c });
+	  var error = tol+1;
+	  var n = 1;	  
+	  $scope.data.rows.push([n, c, fc, error]);
+
+	  while(error>tol && fc !== 0 && n < nIter){
+	      if(fxa*fc<0){
+		  xb=c;
+		  fxb = f.eval({ x: c });
+	      }else{
+		  xa=c;
+		  fxa=f.eval({ x: c });
+	      }
+	      var xaux = c;
+	      c = a - (fxa *(xb-xa))/(fxb-fxa);
+	      fc = f.eval({ x: c });
+	      error = Math.abs(c - xaux);
+	      $scope.data.rows.push([n, c, fc, error]);
+	      n++;
+	  }
+	  if(fc === 0){
+	      $scope.data.root = c;
+	  }else if(error < tol){
+	      $scope.data.root = c;
+	  }else{
+	      $scope.data.root = "failure after" + nIter + " iterations";
+	  }
+      }else{
+	  $scope.data.root = "The interval is invalid";
       }
-    }
+
+      
+
 
     $ionicLoading.hide();
     $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
@@ -297,7 +271,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "False Position";
-    $scope.helpText = "This method is essentially the same as the bisection, the only difference that occurs is that in this approach the middle point is not calculated by halving the interval but is calculated by drawing a line from each point in the range evaluated in function to the other end of the range also evaluated in the function, the point where it intersects the x axis is then the midpoint. This method converges faster than bisection, in fewer iterations. Input Data: Interval with root, absolute error (error tolerance)";
+    $scope.helpText = "TODO-- Detailed information about the fixed point method";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -330,45 +304,39 @@ angular.module('CalcNA.oneVar', ['ionic'])
       template: 'Loading...'
     });
 
-    var x0 = parseFloat($scope.input.x0);
-    var tol = parseFloat($scope.input.tol);
-    var nIter = parseInt($scope.input.nIter);
-    var f = math.compile($scope.input.f);
-    var g = math.compile($scope.input.g);
+      var xa = parseFloat($scope.input.x0);
+      var tol = parseFloat($scope.input.tol);
+      var nIter = parseInt($scope.input.nIter);
+      var f = math.compile($scope.input.f);
+      var g = math.compile($scope.input.g);
+      var delta = parseFloat($scope.input.delta);
 
-    $scope.data = {};
-    $scope.data.rows = [];
+      $scope.data = {};
+      $scope.data.rows = [];
 
-    var fx0 = f.eval({
-      x: x0
-    });
-    var error = tol + 1;
-    var count = 0;
+      $scope.data.headers = ["n", "x", "f(x)", "Error"];
 
-    $scope.data.headers = ["Xn", "f(Xn)", "Error"];
-    $scope.data.rows.push([format1(x0), format2(fx0), format2(error)]);
-
-    while ((fx0 != 0) && (error > tol) && (count < nIter)) {
-      var xn = g.eval({
-        x: x0
-      });
-      fx0 = f.eval({
-        x: xn
-      });
-      error = Math.abs(xn - x0);
-      x0 = xn;
-      count++;
-      $scope.data.rows.push([format1(x0), format2(fx0), format2(error)]);
-    }
-    if (fx0 === 0) {
-      $scope.data.root = x0;
-    } else {
-      if (error < tol) {
-        $scope.data.root = "Root aproximation at " + format1(x0) + " with a tolerance of " + tol;
-      } else {
-        $scope.data.root = "Failure after " + nIter + " iterations.";
+      var fxa = f.eval({ x : xa });
+      var n=0;
+      var error=tol+1;
+      
+      while(fxa!==0 && error > tol && n<nIter){
+	  var xb=g.eval({ x: xa});
+	  fxa=f.eval({ x:xb });
+	  error=Math.abs(xb-xa);
+	  xa=xb;
+	  n++;
+	  $scope.data.rows.push([n, xa, fxa, error]);
       }
-    }
+
+      if(fxa === 0){
+	  $scope.data.root = xa+" is a root";
+      }else if(error < tol){
+	  $scope.data.root = xa+" is an aproximated root";
+      }else{
+	  $scope.data.root = "Failed after " + n + " iterations";
+      }
+
 
     $ionicLoading.hide();
     $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
@@ -382,7 +350,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Fixed Point";
-    $scope.helpText = "he fixed point method is an iterative method for solving systems of linear equations not necessarily. In particular it can be used to determine roots of a function of the form f (x), as long as the convergence criteria are met. ";
+    $scope.helpText = "TODO-- Detailed information about the fixed point method. ";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -398,16 +366,16 @@ angular.module('CalcNA.oneVar', ['ionic'])
   $scope.input = {};
 
   var f = localStorage.getItem("f");
-  var g = localStorage.getItem("g");
+  var ff = localStorage.getItem("ff");
   if (f === "undefined" || f === null) {
     $scope.input.f = "";
   } else {
     $scope.input.f = f;
   }
-  if (g === "undefined" || g === null) {
-    $scope.input.g = "";
+  if (ff === "undefined" || ff === null) {
+    $scope.input.ff = "";
   } else {
-    $scope.input.g = g;
+    $scope.input.ff = ff;
   }
 
   $scope.calc = function() {
@@ -415,53 +383,42 @@ angular.module('CalcNA.oneVar', ['ionic'])
       template: 'Loading...'
     });
 
-    var x0 = parseFloat($scope.input.x0);
-    var tol = parseFloat($scope.input.tol);
-    var nIter = parseInt($scope.input.nIter);
-    var f = math.compile($scope.input.f);
-    var g = math.compile($scope.input.g);
+      var xa = parseFloat($scope.input.x0);
+      var tol = parseFloat($scope.input.tol);
+      var nIter = parseInt($scope.input.nIter);
+      var f = math.compile($scope.input.f);
+      var ff = math.compile($scope.input.ff);
+      var delta = parseInt($scope.input.delta);
+      
+      $scope.data = {};
+      $scope.data.rows = [];
 
-    $scope.data = {};
-    $scope.data.rows = [];
+      var fxa=f.eval({ x: xa });
+      var dfx=ff.eval({ x: xa });
+      var n=0;
+      var error=tol+1;
+      var xb=0;
 
-    var fx0 = f.eval({
-      x: x0
-    });
-    var dfx0 = g.eval({
-      x: x0
-    });
-    var error = tol + 1;
-    var count = 0;
-
-    $scope.data.headers = ["Xn", "f(Xn)", "f'(Xn)", "Error"];
-    $scope.data.rows.push([format1(x0), format2(fx0), format2(dfx0), format2(error)]);
-
-    while ((fx0 != 0) && (error > tol) && (dfx0 != 0) && (count < nIter)) {
-      var xn = x0 - fx0 / dfx0;
-      fx0 = f.eval({
-        x: xn
-      });
-      dfx0 = g.eval({
-        x: xn
-      });
-      error = Math.abs(xn - x0);
-      x0 = xn;
-      count++;
-      $scope.data.rows.push([format1(x0), format2(fx0), format2(dfx0), format2(error)]);
-    }
-    if (fx0 === 0) {
-      $scope.data.root = x0;
-    } else {
-      if (error < tol) {
-        $scope.data.root = "Root approximation at " + format1(x0) + " with a tolerance of " + tol;
-      } else {
-        if (dfx0 === 0) {
-          $scope.data.root = xn + " may be a multiple root.";
-        } else {
-          $scope.data.root = "Failure after " + nIter + " iterations.";
-        }
+      $scope.data.headers = ["n", "Xn", "f(Xn)", "Error"];
+      
+      while(error>tol && fxa !== 0 && n<nIter){
+	  xb=xa-(fxa/dfx);
+	  fxa=f.eval({ x: xa });
+	  dfx=ff.eval({ x: xa });
+	  error=Math.abs(xb-xa);
+	  xa=xb;
+	  n++;
+	  $scope.data.rows.push([n, xa, fxa, error]);
       }
-    }
+      if(fxa === 0){
+	  $scope.data.root=xa + " is a root";
+      }else if(error<tol){
+	  $scope.data.root=xb + " is an aprox root with tol: "+ tol;
+      }else if(dfx===0){
+	  $scope.data.root=xb + " is probably a multiple root";
+      }else{
+	  $scope.data.root="Method failed with " + n + " iterations";
+      }
 
     $ionicLoading.hide();
     $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
@@ -475,7 +432,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Newton";
-    $scope.helpText = "This method uses an initial guess to start the iterative process. Basically operates evaluated at the initial point function and derivative function creating a tangent line extending to cut the x-axis at this point where it cuts the axis of the second value to replace the initial approach is taken and conduct the same process over and over until closer and closer to the root of the function. ";
+    $scope.helpText = "TODO-- Detailed information about the newton method";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -502,60 +459,51 @@ angular.module('CalcNA.oneVar', ['ionic'])
       template: 'Loading...'
     });
 
-    var x0 = parseFloat($scope.input.x0);
-    var x1 = parseFloat($scope.input.x1);
-    var nIter = parseInt($scope.input.nIter);
-    var f = math.compile($scope.input.f);
-    var tol = parseFloat($scope.input.tol);
+      var xa = parseFloat($scope.input.x0);
+      var xb = parseFloat($scope.input.x1);
+      var nIter = parseInt($scope.input.nIter);
+      var f = math.compile($scope.input.f);
+      var tol = parseFloat($scope.input.tol);
+      var delta=parseFloat($scope.input.delta);
+      
+      $scope.data = {};
+      $scope.data.rows = [];
 
-    $scope.data = {};
-    $scope.data.rows = [];
-
-    var fx0 = f.eval({
-      x: x0
-    });
-
-    if (fx0 === 0) {
-      $scope.data.root = x0;
-    } else {
-      var fx1 = f.eval({
-        x: x1
-      });
-      var count = 0;
-      var error = tol + 1;
-      var den = fx1 - fx0;
-
-      $scope.data.headers = ["Xn", "f(Xn)", "Error"];
-      $scope.data.rows.push([format1(x1), format2(fx1), format2(error)]);
-
-      while ((error > tol) && (fx1 != 0) && (den != 0) && (count < nIter)) {
-        var x2 = x1 - (fx1 * (x1 - x0) / den);
-        error = Math.abs(x2 - x1);
-        x0 = x1;
-        fx0 = fx1;
-        x1 = x2;
-        fx1 = f.eval({
-          x: x1
-        });
-        den = fx1 - fx0;
-        count++;
-        $scope.data.rows.push([format1(x1), format2(fx1), format2(error)]);
+      var fxa=f.eval({ x: xa});
+      if(fxa===0){
+	  $scope.data.root=xa+" is a root";
+      }else{
+	  var fxb=f.eval({ x: xb});
+	  var n=0;
+	  var error=tol+1;
+	  var den=fxa-fxb;
+	  
+	  $scope.data.headers = ["n", "Xn", "f(Xn)", "Error"];
+	  $scope.data.rows.push([n, xb, fxb, error]);
+	  while(error>tol && fxa!==0 && den!==0 && n<nIter){
+	      var xc = xb-fxb*(xb-xa)/den;
+	      error=Math.abs(xc-xb);
+	      xa=xb;
+	      fxa=fxb;
+	      xb=xc;
+	      fxb=f.eval({ x: xb});
+	      den=fxb-fxa;
+	      n++;
+	      $scope.data.rows.push([n, xb, fxb, error]);
+	  }
+	  if(fxb===0){
+	      $scope.data.root=xb+" is a root";
+	  }else if(error<tol){
+	      $scope.data.root=xb+" is an aprox root with a tol= "+tol;
+	  }else if(den===0){
+	      $scope.data.root="there are probably multiple roots";
+	  }else{
+	      $scope.data.root="The method failed after "+n+" iterations";
+	  }
       }
+      
 
-      if (fx1 === 0) {
-        $scope.data.root = x1;
-      } else {
-        if (error < tol) {
-          $scope.data.root = "Root approximation at " + format1(x1) + " with a tolerance of " + tol;
-        } else {
-          if (den === 0) {
-            $scope.data.root = "Posible multiple root";
-          } else {
-            $scope.data.root = "Failure after " + nIter + " iterations.";
-          }
-        }
-      }
-    }
+
 
     $ionicLoading.hide();
     $ionicModal.fromTemplateUrl('templates/oneVar/result.html', {
@@ -569,7 +517,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
   $scope.help = function() {
     $scope.methodName = "Secant";
-    $scope.helpText = "This method is very similar to the method of 'False Rule,' the initial two approaches found in the function and draw a secant line between corresponding points of the function, the secant line intersects the x axis at a point p to determine us new value approach. Based on this new value and the previous re-evaluated the function at these two points and a new secant line crossing the axis again and again takes approximate value is plotted, this process is iterated until coming increasingly to the root . ";
+    $scope.helpText = "TODO-- Detailed information about the secant method";
     $ionicModal.fromTemplateUrl('templates/help.html', {
       scope: $scope,
       animation: 'slide-in-up'
