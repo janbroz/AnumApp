@@ -27,6 +27,57 @@ angular.module('CalcNA.eqSys', ['ionic'])
 
 .controller('EqSysCtrl', function($scope, $state, $ionicPopup, $ionicModal) {
   $scope.input = {};
+  $scope.temp = {};
+
+
+  $scope.okFile = function($fileContent){
+    console.log ("The file was updated fine");
+    $scope.temp = $fileContent;
+  };
+
+  $scope.inputMatrix = function(){
+    $scope.data = {}
+    var matrixPopup = $ionicPopup.show({
+      template: '<input type="file" on-read-file="okFile($fileContent)">',
+      title: 'Enter the file of the matrix',
+      subtitle: 'path to the file',
+      scope: $scope,
+      buttons: [{
+        text: 'Cancel',
+	onTap: function(e){
+	  return null;
+	}
+      },{
+        text: '<b>Accept</b>',
+	type: 'button-dark',
+	onTap: function(e){
+	  $scope.data.matrixFile = ($scope.temp).replace(/(\r\n|\n|\r)/gm,",");;
+	  if(!$scope.data.matrixFile){
+	    console.log("There is no data in the file");
+	    console.log($scope.data.matrixFile);
+	    e.preventDefault();
+	  } else{
+	    return $scope.data.matrixFile;
+	  }
+	}
+      }, ]
+    });
+    matrixPopup.then(function(res){
+      if(res != null){
+        localStorage.matrixFile = res;
+	
+	console.log("from storage: " + localStorage.matrixFile);
+	$scope.someVal = localStorage.matrixFile.split(",");
+	localStorage.matrixSize = Math.floor(Math.sqrt($scope.someVal.length));
+	$state.go('app.insert2');
+
+      }else{
+        console.log("You monster!");
+      }
+    });
+  };
+
+
   $scope.showPopup = function() {
     $scope.data = {}
     var myPopup = $ionicPopup.show({
@@ -191,10 +242,22 @@ angular.module('CalcNA.eqSys', ['ionic'])
   for (var i = 0; i < size; i++) {
     $scope.matrix[i] = new Array(size);
   }
+  $scope.ml = localStorage.matrixFile.split(",");
+  var eqPos = 0;
+  var modl = size;
+
   for (var i = 0; i < size; i++) {
-    $scope.vector[i] = 0;
+    $scope.vector[i] = parseInt($scope.ml[size*(i+1)+i]);
     for (var j = 0; j < size; j++) {
-      $scope.matrix[i][j] = 0;
+      if(eqPos % modl === 0 && eqPos !== 0){
+	console.log("it:" + i + " " + modl);
+        eqPos++;
+	modl = (i+1)*size+(i);
+	console.log("it:" + i + " " + modl);
+      }
+      $scope.valAt = parseFloat($scope.ml[eqPos]);
+      $scope.matrix[i][j] = $scope.valAt;
+      eqPos++;
     }
   }
 
