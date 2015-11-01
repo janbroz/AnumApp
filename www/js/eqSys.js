@@ -273,23 +273,24 @@ angular.module('CalcNA.eqSys', ['ionic'])
 })
 
 .controller('GeSimpleCtrl', function($scope, $ionicLoading, $ionicModal) {
-  var n = parseInt(localStorage.matrixSize);
-  var a = getMat(n);
-  $scope.etapas = [];
-  for (var k = 0; k < n-1 ; k++) {
-    for (var i = k+1; i < n; i++) {
-      if (a[i][i] != 0) {
-        var mult = a[i][k] / a[k][k]
-        for (var j = k; j < n+1; j++) {
-          a[i][j] -= mult * a[k][j];
-        }
-      } else {
-        alert("There's a zero in the diagonal, try another method.")
+  var size=parseInt(localStorage.matrixSize);
+  var matrix=getMat(size);
+  $scope.etapas=[];
+
+  for(var k=0; k<size-1; k++){
+    for(var i=k+1; i<size; i++){
+      if(matrix[i][i]!=0){
+        var mult=matrix[i][k]/matrix[k][k];
+	for(var j=k; j<size+1; j++){
+	  matrix[i][j]-=mult*matrix[k][j];
+	}
+      }else{
+        alert("You should use other method because there is a 0 in the diagonal")
       }
     }
-    $scope.etapas[k] = JSON.parse(JSON.stringify(a));
+    $scope.etapas[k]=JSON.parse(JSON.stringify(matrix));
   }
-  $scope.result = regresiveSustitution(a,n);
+  $scope.result = regresiveSustitution(matrix,size);
 
   $scope.help = function() {
     $scope.methodName = "Simple Gaussian Elimination";
