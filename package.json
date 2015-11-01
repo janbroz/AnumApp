@@ -2,7 +2,8 @@
   "name": "calcna",
   "version": "1.0.0",
   "engines":  {
-    "node": "0.10.25"
+      "node": "0.10.25",
+      "npm": "1.4.21"
   },
   "description": "CalcNA: An Ionic project",
   "dependencies": {
