@@ -132,10 +132,11 @@ angular.module('CalcNA.oneVar', ['ionic'])
 	  var c = (xa+xb)/2;
 	  var fc = f.eval({ x: c });
 	  var error = tol+1;
-	  var n = 1;	  
+	  var n = 1;
+	  var h = fxa;
 	  $scope.data.rows.push([n, c, fc, error]);
 
-	  while(error>tol && fc !== 0 && n < nIter){
+	  while(error>tol && fc !== 0 && n < nIter && Math.abs(fc) > delta){
 	      if(fxa*fc<0){
 		  xb=c;
 		  fxb = f.eval({ x: c });
@@ -230,7 +231,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 	  var n = 1;	  
 	  $scope.data.rows.push([n, c, fc, error]);
 
-	  while(error>tol && fc !== 0 && n < nIter){
+	  while(error>tol && fc !== 0 && n < nIter && Math.abs(fc) > delta){
 	      if(fxa*fc<0){
 		  xb=c;
 		  fxb = f.eval({ x: c });
@@ -320,7 +321,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
       var n=0;
       var error=tol+1;
       
-      while(fxa!==0 && error > tol && n<nIter){
+      while(fxa!==0 && error > tol && n<nIter && Math.abs(fxa) > delta){
 	  var xb=g.eval({ x: xa});
 	  fxa=f.eval({ x:xb });
 	  error=Math.abs(xb-xa);
@@ -401,7 +402,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
       $scope.data.headers = ["n", "Xn", "f(Xn)", "Error"];
       
-      while(error>tol && fxa !== 0 && n<nIter){
+      while(error>tol && fxa !== 0 && n<nIter && Math.abs(fxa) > delta){
 	  xb=xa-(fxa/dfx);
 	  fxa=f.eval({ x: xa });
 	  dfx=ff.eval({ x: xa });
@@ -480,7 +481,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 	  
 	  $scope.data.headers = ["n", "Xn", "f(Xn)", "Error"];
 	  $scope.data.rows.push([n, xb, fxb, error]);
-	  while(error>tol && fxa!==0 && den!==0 && n<nIter){
+	  while(error>tol && fxa!==0 && den!==0 && n<nIter && Math.abs(fxa) > delta){
 	      var xc = xb-fxb*(xb-xa)/den;
 	      error=Math.abs(xc-xb);
 	      xa=xb;
@@ -652,4 +653,12 @@ function format2(number) {
       notation: 'exponential'
     }
   );
+}
+
+function parseDelta(deltaValue){
+  if(delta == null){
+    return 0;
+  }else{
+    return delta;
+  }
 }
