@@ -231,7 +231,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 	  var n = 1;	  
 	  $scope.data.rows.push([n, c, fc, error]);
 
-	  while(error>tol && fc !== 0 && n < nIter && Math.abs(fc) > delta){
+	  while(error>tol && n < nIter && Math.abs(fc) > delta){
 	      if(fxa*fc<0){
 		  xb=c;
 		  fxb = f.eval({ x: c });
@@ -402,7 +402,7 @@ angular.module('CalcNA.oneVar', ['ionic'])
 
       $scope.data.headers = ["n", "Xn", "f(Xn)", "Error"];
       
-      while(error>tol && fxa !== 0 && n<nIter && Math.abs(fxa) > delta){
+      while(error>tol && n<nIter && Math.abs(fxa) > delta){
 	  xb=xa-(fxa/dfx);
 	  fxa=f.eval({ x: xa });
 	  dfx=ff.eval({ x: xa });

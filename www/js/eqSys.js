@@ -781,7 +781,7 @@ function pivoteoTotal(a,n,k){
     }
   }
   if(mayor = 0){
-    alert("Not unic solution");
+    alert("There is no unic solution");
   }else{
     if(filaMayor != k){
       a = intercambioFilas(a,filaMayor,k,n);
