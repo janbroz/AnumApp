@@ -213,10 +213,47 @@ angular.module('CalcNA', [ 'ionic', 'CalcNA.controllers', 'ng'])
     url: '/interpolation',
     views: {
       'menuContent' :{
-        templateUrl: 'templates/interpolation.html'
+        templateUrl: 'templates/interpolation.html',
+	controller: 'InterpCtrl'
       }
     }
   })
+  .state('app.polynewton',{
+    url: '/polynewton',
+    views: {
+      'menuContent':{
+        templateUrl: 'templates/interp/polynewton.html',
+	controller: 'PolyNewtonCtrl'
+      }
+    }
+  })
+  .state('app.polynewtondif',{
+    url: '/polynewtondif',
+    views: {
+      'menuContent':{
+        templateUrl: 'templates/interp/polynewtondif.html',
+	controller: 'PolyNewtonDifCtrl'
+      }
+    }
+  })
+  .state('app.plagrange',{
+    url: '/plagrange',
+    views: {
+      'menuContent':{
+        templateUrl: 'templates/interp/plagrange.html',
+	controller: 'PLagrangeCtrl'
+      }
+    }
+  })
+  .state('app.insertPoints', {
+    url: '/insertPoints',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/interp/insert_points.html',
+        controller:'InterpInsertCtrl'
+      }
+    }
+  })  
 })
 
 .directive('onReadFile', function ($parse) {

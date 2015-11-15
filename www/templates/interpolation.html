@@ -3,6 +3,51 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>This page is on contruction...</h1>
+    <ion-list>
+      <ion-item class="item-stable" ng-click="showPopup()">
+	Insert Data
+      </ion-item>
+      <ion-item class="item-stable"
+		ng-click="toggleGroup(1)"
+		ng-class="{active: isGroupShown(1)}">
+	Ecuation systems methods
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/polynewton">
+	Polinomio interpolante de newton
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/polynewtondif">
+	Polinomio interpolante de newton con diferencias
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/plagrange">
+	Polinomio interpolante de Lagrange
+      </ion-item>
+      <ion-item class="item-stable"
+                 ng-click="toggleGroup(2)"
+		 ng-class="{active: isGroupShown(2)}">
+        Otros metodos
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(2)"
+		href="#/app/cosito">
+	Cosito 1
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(2)"
+		href="#/app/cosito2">
+	Cosito 2
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(2)"
+		href="#/app/cosito3">
+	Cosito 3
+      </ion-item>
+      
+    </ion-list>
   </ion-content>
 </ion-view>

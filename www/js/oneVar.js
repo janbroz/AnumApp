@@ -404,8 +404,8 @@ angular.module('CalcNA.oneVar', ['ionic'])
       
       while(error>tol && n<nIter && Math.abs(fxa) > delta){
 	  xb=xa-(fxa/dfx);
-	  fxa=f.eval({ x: xa });
-	  dfx=ff.eval({ x: xa });
+	  fxa=f.eval({ x: xb });
+	  dfx=ff.eval({ x: xb });
 	  error=Math.abs(xb-xa);
 	  xa=xb;
 	  n++;

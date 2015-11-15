@@ -1,0 +1,92 @@
+angular.module('CalcNA.interp', ['ionic'])
+
+.controller('InterpCtrl', function($scope){
+  $scope.toggleGroup = function(group){
+    if($scope.isGroupShown(group)){
+      $scope.shownGroup = null;
+    }else{
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group){
+    return $scope.shownGroup === group;
+  };
+})
+
+.controller('InterpInsertCtrl', function($scope, $state){
+  $scope.idata = {};
+  $scope.store = function(){
+  };
+})
+
+.controller('EqSysMethCtrl', function($scope, $ionicLoading, $ionicModal){
+  $scope.help = function(){
+    $scope.methodName = "Equation systems method";
+    $scope.helpText = "TODO - Help text";
+    $ionicModal.fromTemplateUrl('templates/help.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+})
+
+.controller('PolyNewtonCtrl', function($scope, $ionicLoading, $ionicModal){
+  $scope.input = {};
+  $scope.calc = function(){
+    console.log("Calculate me babeee");
+  }
+
+  $scope.help = function(){
+    $scope.methodName = "Polinomio interpolante de newton";
+    $scope.helpText = "Que hace el polinomio interpolante de newton";
+    $ionicModal.fromTemplateUrl('templates/help.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+})
+
+.controller('PolyNewtonDifCtrl', function($scope, $ionicLoading, $ionicModal){
+  $scope.input = {};
+  $scope.calc = function(){
+
+  }
+
+  $scope.help = function(){
+    $scope.methodName = "Polinomio interpolante de newton con diferencias";
+    $scope.helpText = "Que hace el polinomio interpolante de newton";
+    $ionicModal.fromTemplateUrl('templates/help.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+})
+
+.controller('PLagrangeCtrl', function($scope, $ionicLoading, $ionicModal){
+  $scope.input = {};
+  $scope.calc = function(){
+    console.log("This should calculate the lagrange polynome");
+
+  }
+
+  $scope.help = function(){
+    $scope.methodName = "Polinomio de lagrange";
+    $scope.helpText = "Que hace el polinomio de lagrange";
+    $ionicModal.fromTemplateUrl('templates/help.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+})

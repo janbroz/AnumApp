@@ -1,0 +1,11 @@
+<ion-view title= "Insert Points">
+  <ion-nav-buttons side = "left">
+
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <h3> Puntos: </h3>
+
+    <p>Holis</p>
+  </ion-content>
+
+</ion-view>
