@@ -250,6 +250,66 @@ angular.module('CalcNA.interp', ['ionic'])
       modal.show();
     });
   }
+})
+
+.controller('LSplineCtrl', function($scope, $ionicLoading, $ionicModal)
+{
+  $scope.calc = function(){
+    console.log("Calculate the lineal spline");
+    $scope.data = {};
+    $scope.data.poly = "p(x) = some lineal spline";
+
+
+    $ionicModal.fromTemplateUrl('templates/interp/result.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
+  $scope.help = function(){
+    $scope.methodName = "Lineal splines";
+    $scope.helpText = "What does a lineal spline do";
+    $ionicModal.fromTemplateUrl('templates/help.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+})
+
+.controller('CSplineCtrl', function($scope, $ionicLoading, $ionicModal)
+{
+  $scope.calc = function(){
+    console.log("Calculate the cubic spline");
+    $scope.data = {};
+
+    $scope.data.poly = "p(x) = some cubic spline";
+
+    $ionicModal.fromTemplateUrl('templates/interp/result.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });    
+  }
+
+  $scope.help = function(){
+    $scope.methodName = "Cubic splines";
+    $scope.helpText = "What does a cubic spline do";
+    $ionicModal.fromTemplateUrl('templates/help.html',{
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal){
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
 });
 
 function getPoints(n){

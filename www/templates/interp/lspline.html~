@@ -1,0 +1,8 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <a class="button icon-left ion-chevron-left button-clear button-dark"
+       ng-click="modal.hide()">Back</a>
+  </ion-header-bar>
+
+
+</ion-modal-view>

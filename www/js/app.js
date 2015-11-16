@@ -253,6 +253,24 @@ angular.module('CalcNA', [ 'ionic', 'CalcNA.controllers', 'ng'])
         controller:'InterpInsertCtrl'
       }
     }
+  })
+  .state('app.lspline', {
+    url: '/lspline',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/interp/lspline.html',
+        controller:'LSplineCtrl'
+      }
+    }
+  })
+  .state('app.cspline', {
+    url: '/cspline',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/interp/cspline.html',
+        controller:'CSplineCtrl'
+      }
+    }
   })  
 })
 

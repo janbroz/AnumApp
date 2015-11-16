@@ -17,11 +17,7 @@
 		href="#/app/polynewton">
 	Polinomio interpolante de newton
       </ion-item>
-      <ion-item class="item-accordion"
-		ng-show="isGroupShown(1)"
-		href="#/app/polynewtondif">
-	Polinomio interpolante de newton con diferencias
-      </ion-item>
+
       <ion-item class="item-accordion"
 		ng-show="isGroupShown(1)"
 		href="#/app/plagrange">
@@ -30,24 +26,19 @@
       <ion-item class="item-stable"
                  ng-click="toggleGroup(2)"
 		 ng-class="{active: isGroupShown(2)}">
-        Otros metodos
+        Splines
       </ion-item>
       <ion-item class="item-accordion"
 		ng-show="isGroupShown(2)"
-		href="#/app/cosito">
-	Cosito 1
+		href="#/app/lspline">
+	Lineal splines
       </ion-item>
       <ion-item class="item-accordion"
 		ng-show="isGroupShown(2)"
-		href="#/app/cosito2">
-	Cosito 2
+		href="#/app/cspline">
+	Cubic splines
       </ion-item>
-      <ion-item class="item-accordion"
-		ng-show="isGroupShown(2)"
-		href="#/app/cosito3">
-	Cosito 3
-      </ion-item>
-      
+     
     </ion-list>
   </ion-content>
 </ion-view>
