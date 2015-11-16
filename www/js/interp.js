@@ -255,10 +255,25 @@ angular.module('CalcNA.interp', ['ionic'])
 .controller('LSplineCtrl', function($scope, $ionicLoading, $ionicModal)
 {
   $scope.calc = function(){
-    console.log("Calculate the lineal spline");
+    var n = parseInt(localStorage.number_points);
     $scope.data = {};
     $scope.data.poly = "p(x) = some lineal spline";
+    $scope.data.tuple = getTuple(n);
+    $scope.data.ls = [];
+    $scope.data.interv = [];
+    $scope.data.pxs = [];
 
+    for(var i=0; i<n-1; i++){
+      var intv = [$scope.data.tuple[i][0], $scope.data.tuple[i+1][0]];
+      var tuple = [[$scope.data.tuple[i][0],$scope.data.tuple[i][1]], [$scope.data.tuple[i+1][0],$scope.data.tuple[i+1][1]]];
+      $scope.data.ls.push(tuple);
+      $scope.data.interv.push(intv);
+    }
+    
+    for(var i=0; i<n-1; i++){
+      var leq = getPxs($scope.data.ls[i]);
+      $scope.data.pxs.push(leq);
+    }
 
     $ionicModal.fromTemplateUrl('templates/interp/result.html',{
       scope: $scope,
@@ -329,5 +344,24 @@ function getPoints(n){
   return points;
 }
 
+function getTuple(n){
+  var tuple = [];
+  for(var i=0; i<n; i++){
+    var row = [];
+    for(var j=0; j<2; j++){
+      value = parseFloat(localStorage.getItem("P"+i+j));
+      row.push(value);
+    }
+    tuple.push(row);
+  }
+  return tuple;
+}
 
- 
+function getPxs(data){
+  console.log(data);
+  var m = (data[0][1] -data[1][1]) / (data[0][0] - data[1][0]);
+  
+
+
+  return "p(x) = "+ m + "x + " + (data[0][0]*m*(-1) + data[0][1]);
+}

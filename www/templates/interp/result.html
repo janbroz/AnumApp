@@ -15,6 +15,11 @@
     <div class="row" ng-repeat="bs in data.bs track by $index">
       b{{$index}} = {{bs}}
     </div>
-
+    <div class="row" ng-repeat="tp in data.tuple track by $index">
+      point{{$index}} = {{tp}}
+    </div>    
+    <div class="row" ng-repeat="ls in data.interv track by $index">
+      {{ls}} => {{data.pxs[$index]}}
+    </div>    
   </ion-content>
 </ion-modal-view>
