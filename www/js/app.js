@@ -271,7 +271,26 @@ angular.module('CalcNA', [ 'ionic', 'CalcNA.controllers', 'ng'])
         controller:'CSplineCtrl'
       }
     }
-  })  
+  })
+  .state('app.integration', {
+    url: '/integration',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/integration.html',
+	controller: 'IntegrCtrl'
+      }
+    }
+  })
+  .state('app.pequations', {
+    url: '/pequations',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/pequations.html',
+	controller: 'PequaCtrl'
+      }
+    }
+  })
+  
 })
 
 .directive('onReadFile', function ($parse) {
