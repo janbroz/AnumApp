@@ -1,0 +1,297 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.9.11)  17 NOV 2015 10:28
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**anum.tex
+(./anum.tex
+LaTeX2e <2014/05/01>
+Babel <3.9l> and hyphenation patterns for 2 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
+Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count87
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathpazo.sty
+Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2013/05/23 v2.5a Micro-typographical refinements (RS)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\MT@toks=\toks15
+\MT@count=\count88
+LaTeX Info: Redefining \textls on input line 766.
+\MT@outer@kern=\dimen103
+LaTeX Info: Redefining \textmicrotypecontext on input line 1285.
+\MT@listname@count=\count89
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2013/05/23 v2.5a Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 915.
+LaTeX Info: Redefining \lslig on input line 915.
+\MT@outer@space=\skip43
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count90
+\Gm@cntv=\count91
+\c@Gm@tempcnt=\count92
+\Gm@bindingoffset=\dimen104
+\Gm@wd@mp=\dimen105
+\Gm@odd@mp=\dimen106
+\Gm@even@mp=\dimen107
+\Gm@layoutwidth=\dimen108
+\Gm@layoutheight=\dimen109
+\Gm@layouthoffset=\dimen110
+\Gm@layoutvoffset=\dimen111
+\Gm@dimlist=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2014/10/28 v1.8i multicolumn formatting (FMi)
+\c@tracingmulticols=\count93
+\mult@box=\box26
+\multicol@leftmargin=\dimen112
+\c@unbalance=\count94
+\c@collectmore=\count95
+\doublecol@number=\count96
+\multicoltolerance=\count97
+\multicolpretolerance=\count98
+\full@width=\dimen113
+\page@free=\dimen114
+\premulticols=\dimen115
+\postmulticols=\dimen116
+\multicolsep=\skip44
+\multicolbaselineskip=\skip45
+\partial@page=\box27
+\last@line=\box28
+\maxbalancingoverflow=\dimen117
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count99
+\c@finalcolumnbadness=\count100
+\last@try=\dimen118
+\multicolovershoot=\dimen119
+\multicolundershoot=\dimen120
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+\mc@col@check@num=\count101
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen121
+\captionmargin@=\dimen122
+\captionwidth=\dimen123
+\caption@tempdima=\dimen124
+\caption@indent=\dimen125
+\caption@parindent=\dimen126
+\caption@hangindent=\dimen127
+)
+\c@ContinuedFloat=\count102
+)
+No file anum.aux.
+\openout1 = `anum.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 18.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
+File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
+)
+\big@size=\dimen128
+LaTeX Info: Redefining \microtypecontext on input line 18.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ppl.cfg
+File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* hratio: 1:1
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(91.04881pt, 608.5238pt, 95.39737pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=608.5238pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-18.22118pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=20.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 19.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
+File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
+)
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 19.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 19.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 19.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 19.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+Package microtype Info: Loading generic settings for font family
+(microtype)             `zplm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+LaTeX Warning: No \author given.
+
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 21.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 26.
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <12> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 29.
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 32.
+ [2] [3] [4] [5] [6]
+(./anum.aux) ) 
+Here is how much of TeX's memory you used:
+ 3951 strings out of 495020
+ 63771 string characters out of 6181324
+ 253227 words of memory out of 5000000
+ 7094 multiletter control sequences out of 15000+600000
+ 34910 words of font info for 93 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 36i,6n,38p,456b,201s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/
+share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on anum.pdf (6 pages, 42293 bytes).
+PDF statistics:
+ 32 PDF objects out of 1000 (max. 8388607)
+ 21 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 27649 words of extra memory for PDF output out of 29859 (max. 10000000)
+
