@@ -1,18 +1,5 @@
 \documentclass[11pt]{article}
 
-\makeatletter
-% we use \prefix@<level> only if it is defined
-\renewcommand{\@seccntformat}[1]{%
-  \ifcsname prefix@#1\endcsname
-    \csname prefix@#1\endcsname
-  \else
-    \csname the#1\endcsname\quad
-  \fi}
-% define \prefix@section
-\newcommand\prefix@section{Seccion \thesection: }
-\makeatother
-
-
 \usepackage{lipsum}
 \usepackage[sc]{mathpazo}
 \usepackage[T1]{fontenc}
@@ -25,24 +12,19 @@
 
 
 
-\author{
-  Broz Lozano, Juan Felipe\\
-  \texttt{f870421@gmail.com}
-}
 
-\title{Trabajo final de analisis numerico}
+\title{Final analisis numerico}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-  Proyecto final de la materia analisis numerico. Para el cual se programaron los metodos numericos de los capitulos de solucion de ecuaciones, sistemas de ecuaciones e interpolacion, dejando como trabajo adicional los metodos para integracion y solucion de ecuaciones diferenciales. El proyecto se desarrollo durante la asignatura, con revisiones periodicas de los metodos y sus correspondientes interfaces.
+  Proyecto final de la materia analisis numerico, donde se deben programar los metodos numericos para los capitulos de solucion de ecuaciones, sistemas de ecuaciones e interpolacion.
 \end{abstract}
-
 
 \newpage
 \section{Ecuaciones no lineales}
-Son ecuaciones de la forma F(u) = 0. 
+Something about the cap 2, yeah, you know.
 
 \subsection{Busquedas por intervalos}
 Something about the incremental search.
