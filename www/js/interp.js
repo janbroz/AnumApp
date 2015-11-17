@@ -311,6 +311,7 @@ angular.module('CalcNA.interp', ['ionic'])
     $scope.data.cspl = [];
     $scope.data.cspl2 = [];
     $scope.data.cspl3 = [];
+    $scope.data.cspl4 = [];
 
     $scope.data.poly = "p(x) = a1*x^3 + b1*x^2 + c1*x + d1";
     var ys = [];
@@ -331,6 +332,7 @@ angular.module('CalcNA.interp', ['ionic'])
     $scope.data.cspl = get_pxs($scope.data.intervl, n-1, vecto);
     $scope.data.cspl2 = get_1dpxs($scope.data.intervl, $scope.data.intervl.length-1,vecto2);
     $scope.data.cspl3 = get_2dpxs($scope.data.intervl, $scope.data.intervl.length-1, vecto2);
+    $scope.data.cspl4 = get_3dpxs(xs);
     //console.log(get_pxs($scope.data.intervl, n-1));
 
     $ionicModal.fromTemplateUrl('templates/interp/result.html',{
@@ -442,6 +444,19 @@ function get_2dpxs(array, n, vector){
     result.push(val);
     s = s+2;
   }
+  return result;
+}
+
+function get_3dpxs(vector){
+  var result = [];
+  var x = vector[0];
+  var it = vector.length-1;
+  var y = vector[it];
+  val = (6*x)+"a1 + 2b1 = 0";
+  val2 = (6*y)+"a"+it+ " + 2b"+it+ " = 0";
+  result.push(val);
+  result.push(val2);
+  console.log(x + " -- " + y);
   return result;
 }
 
