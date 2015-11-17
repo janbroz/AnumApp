@@ -20,6 +20,16 @@
     </div>    
     <div class="row" ng-repeat="ls in data.interv track by $index">
       {{ls}} => {{data.pxs[$index]}}
+    </div>
+
+    <div class="row" ng-repeat="cspl in data.cspl track by $index">
+      {{cspl}}
+    </div>
+    <div class="row" ng-repeat="cspl2 in data.cspl2 track by $index">
+      {{cspl2}}
+    </div>
+    <div class="row" ng-repeat="cspl3 in data.cspl3 track by $index">
+      {{cspl3}}
     </div>    
   </ion-content>
 </ion-modal-view>

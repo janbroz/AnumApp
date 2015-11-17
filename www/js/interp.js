@@ -300,10 +300,38 @@ angular.module('CalcNA.interp', ['ionic'])
 .controller('CSplineCtrl', function($scope, $ionicLoading, $ionicModal)
 {
   $scope.calc = function(){
-    console.log("Calculate the cubic spline");
-    $scope.data = {};
 
-    $scope.data.poly = "p(x) = some cubic spline";
+    var n = parseInt(localStorage.number_points);
+    $scope.data = {};
+    $scope.data.tuple = getTuple(n);
+
+    $scope.data.pxs = [];
+    $scope.data.intervl = [];
+    $scope.data.ls = [];
+    $scope.data.cspl = [];
+    $scope.data.cspl2 = [];
+    $scope.data.cspl3 = [];
+
+    $scope.data.poly = "p(x) = a1*x^3 + b1*x^2 + c1*x + d1";
+    var ys = [];
+    var xs = [];
+    for(var i=0; i<n;i++){
+      ys.push($scope.data.tuple[i][1]);
+      xs.push($scope.data.tuple[i][0]);
+    }
+    for(var i=0; i<n-1; i++){
+      var intv = [$scope.data.tuple[i][0], $scope.data.tuple[i+1][0]];
+      var tuple = [[$scope.data.tuple[i][0],$scope.data.tuple[i][1]], [$scope.data.tuple[i+1][0],$scope.data.tuple[i+1][1]]];
+      $scope.data.ls.push(tuple);
+      $scope.data.intervl.push(intv);
+
+    }
+    var vecto = makeVecto(ys);
+    var vecto2 = makeVecto2(xs);
+    $scope.data.cspl = get_pxs($scope.data.intervl, n-1, vecto);
+    $scope.data.cspl2 = get_1dpxs($scope.data.intervl, $scope.data.intervl.length-1,vecto2);
+    $scope.data.cspl3 = get_2dpxs($scope.data.intervl, $scope.data.intervl.length-1, vecto2);
+    //console.log(get_pxs($scope.data.intervl, n-1));
 
     $ionicModal.fromTemplateUrl('templates/interp/result.html',{
       scope: $scope,
@@ -363,5 +391,79 @@ function getPxs(data){
   
 
 
-  return "p(x) = "+ m + "x + " + (data[0][0]*m*(-1) + data[0][1]);
+  return "y = "+ m + "x + " + (data[0][0]*m*(-1) + data[0][1]);
+}
+
+
+function get_pxs(array, n, vector){
+  var result = [];
+  var s = 0;
+  for(var i=0; i<n; i++){
+    for(var k=0; k<2; k++){
+      var it = i+1;
+      var x = parseInt(array[i][k]);
+      var x1 = Math.pow(x,3);
+      var x2 = Math.pow(x,2);
+      var x3 = x;
+      var val = "";
+      val = (x1)+"a" +it+" +"+(x2)+ "b"+ it +" +"+(x3)+ "c"+it+" + d"+it + " = " + vector[s];
+      result.push(val);
+      s++;
+    }
+  }
+  return result;
+}
+
+function get_1dpxs(array, n, vector){
+  var result = [];
+  var s = 0;
+  for(var i=0; i<n; i++){
+    var it = i+1;
+    var itt = it+1;
+    var x = vector[s];
+    var x2 = vector[s+1];
+    val = (3*Math.pow(x,2))+"a"+it+" + "+(2*x)+"b"+it+" + "+"c"+it +" = " + (3*Math.pow(x2,2))+"a"+(itt)+" + "+(2*x2)+"b"+(itt)+" + "+"c"+(itt);
+    result.push(val);
+    s = s+2;
+  }
+
+  return result;
+}
+
+function get_2dpxs(array, n, vector){
+  var result = [];
+  var s = 0;
+  for(var i=0; i<n; i++){
+    var it = i+1;
+    var itt = it+1;
+    var x = vector[s];
+    var x2 = vector[s+1];
+    val = (6*x)+"a"+it+" + "+"2b"+it + " = " + (6*x2)+"a"+itt+" + "+"2b"+itt ;
+    result.push(val);
+    s = s+2;
+  }
+  return result;
+}
+
+function makeVecto(vector){
+  var result = [];
+  result.push(vector[0]);
+  for(var i=1; i<vector.length-1; i++){
+    result.push(vector[i]);
+    result.push(vector[i]);
+  }
+  result.push(vector[(vector.length)-1]);
+
+  return result;
+}
+
+function makeVecto2(vector){
+  console.log(vector);
+  var result = []
+  for(var i=1; i<vector.length-1; i++){
+    result.push(vector[i]);
+    result.push(vector[i]);
+  }
+  console.log(result);
+  return result;
 }
