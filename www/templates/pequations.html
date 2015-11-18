@@ -5,10 +5,29 @@
   <ion-content class="has-header">
 
     <ion-list>
-      <ion-item class="item-stable" ng-click="showPopup()">
+      <ion-item class="item-stable" href="#/app/pinsert">
 	Insert data
       </ion-item>
-
+      <ion-item class="item-stable"
+		ng-click="toggleGroup(1)"
+		ng-class="{active: isGroupShown(1)}">
+	Solve Eq
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/euler">
+	Euler
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/eulermod">
+	Euler modificado
+      </ion-item>      
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/rk4">
+	RK4
+      </ion-item>      
     </ion-list>
   </ion-content>
 </ion-view>

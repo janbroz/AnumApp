@@ -317,7 +317,42 @@ angular.module('CalcNA', [ 'ionic', 'CalcNA.controllers', 'ng'])
       }
     }
   })
-  
+  .state('app.pinsert', {
+    url: '/pinsert',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/pequations/insert.html',
+        controller: 'PequInsertCtrl'
+      }
+    }
+  })
+  .state('app.euler', {
+    url: '/euler',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/pequations/euler.html',
+	controller: 'EulerCtrl'
+      }
+    }
+  })  
+  .state('app.eulermod', {
+    url: '/eulermod',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/pequations/eulermod.html',
+	controller: 'EulerModCtrl'
+      }
+    }
+  })
+  .state('app.rk4', {
+    url: '/rk4',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/pequations/rk4.html',
+	controller: 'Rk4Ctrl'
+      }
+    }
+  })    
 })
 
 .directive('onReadFile', function ($parse) {
