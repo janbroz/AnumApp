@@ -5,8 +5,20 @@
     <h1 class="title"> Resulting partial equation solve</h1>
   </ion-header-bar>
   <ion-content>
-    <div class="row" ng-repeat="n in response.yval track by $index">
-      {{n[0]}}  -----   {{n[1]}}
+    <div class="card">
+      <div class="item item-text-wrap">
+	<p>Result is:</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" ng-repeat="hd in response.headers">
+	<strong>{{hd}}</strong>
+      </div>
+    </div>
+    <div class="row" ng-repeat="row in response.yval">
+      <div class="col" ng-repeat="col in row track by $index">
+	{{col}}
+      </div>
     </div>
 
     <br>

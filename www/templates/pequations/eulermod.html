@@ -12,9 +12,21 @@
 	<input type="text" placeholder="{{input.fx}}" ng-model="input.fx">
       </label>
       <label class="item item-input item-stacked-label">
+	<span class="input-label">a</span>
+	<input type="number" ng-model="input.vala">
+      </label>
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">y(a)</span>
+	<input type="number" ng-model="input.valy">
+      </label>      
+      <label class="item item-input item-stacked-label">
 	<span class="input-label">delta</span>
 	<input type="number" ng-model="input.delta">
       </label>
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">n</span>
+	<input type="number" ng-model="input.n">
+      </label>      
       <br>
       <button class="button button-block button-dark" ng-click="calc()">
         Calculate
