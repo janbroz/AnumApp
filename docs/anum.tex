@@ -19,6 +19,7 @@
 \linespread{1.05}
 \usepackage{microtype}
 \usepackage{listings}
+\usepackage{amsmath}
 
 \usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
 \usepackage{multicol}
@@ -53,32 +54,137 @@ Teniendo el intervalo $[a,b]$ se aplica alguno de los siguientes metodos.
 Se comienza desde un intervalo cerrado $[a,b]$ y teniendo en cuenta los parametros de tolerancia, numero de intervalos y delta se hace una biseccion y se toma el subintervalo donde el producto de la funcion $y = f(x)$ evaluada en sus extremos retorna un valor menor a 0.
 \paragraph{Pseudocodigo\\}
 \begin{lstlisting}[frame=single, mathescape=true]
-Inputs: f, X0, Xn, n, tol
+Inputs: f, $X_{0}$, $X_{n}$, n, tol, delta
 i = 1
-While i $\leq$ n {          
-  c = (Xo + Xn)/2      
-  If (f(c) = 0 or (Xo - Xn)/2) < tol then 
+While i $\leq$ n do         
+  c = ($X_{0}$ + $X_{n}$)/2      
+  If (f(c) == 0 or ($X_{0}$ - $X_{n}$)/2) < tol then 
     Print(c)
     Stop
   end If
   i = i+ 1                                                         
   If sign(f(c)) == sign(f(a)) then 
-    Xo = c 
+    $X_{0}$ = c 
   else
-    Xn = c
+    $X_{n}$ = c
   end If
 end While
+Print(Method failed, max number of steps exceeded)
 \end{lstlisting}
 \subsubsection{Regla falsa}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Se parte de un intervalo inicial $[x_{1},x_{2}]$ y se asume que la funcion solo cambia de signo una vez en el intervalo. A continuacion se busca un $x_{3}$ que esta dado por la interseccion entre el eje x y una linea recta que pasa por $(x_{1},f(x_{1}))$ y $(x_{2},f(x_{2}))$. Este valor esta dado por: \[ x_{3} = x_{1} - \dfrac{(x_{2}-x_{1})*f(x_{1})}{f(x_{2})-f(x_{1})} \]
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Inputs: f, $X_{0}$, $X_{n}$, n, tol, delta
+i = 1
+While i $\leq$ n do
+  c = $X_{0}$ - f($X_{0}$)*(($X_{n}-X_{0}$)/f($X_{n}$)-f($X_{0}$))
+  If (f(c) == 0 or ($X_{0} - X_{n}$)/2 < tol then
+    Print(c)
+    Stop
+  end If
+  i = i+ 1                                                         
+  If sign(f(c)) == sign(f(a)) then 
+    $X_{0}$ = c 
+  else
+    $X_{n}$ = c
+  end If
+end While
+Print(Method failed, max number of steps exceeded)
+
+\end{lstlisting}
 
 \subsection{Metodos abiertos}
+Estos metodos comienzan con uno o dos puntos que pueden o no tener una raiz entre ellos, por esta razon se les conoce como metodos abiertos.
 \subsubsection{Punto fijo}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Require que la ecuacion $f(x) = 0$ se vuelva a escribir de la forma $x = g(x)$. Luego con una aproximacion inicial para $x_{0}$ se resuelve g y se obtiene $x_{1}$, $x_{1} = g(x_{0})$. A partir de aca el valor de $x_{i+1}$ se calcula de la forma: $x_{i+1} = g(x_{i})$.
+
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Inputs: tol, $X_{a}$, n, delta
+fx = $f(X_{a})$  
+cont = 0
+error = tol + 1
+While fx $\neq$ 0 and error > tol and cont < n do
+  $X_{n}$ = $g(X_{a})$
+  fx = $f(X_{n})$
+  error = $abs(X_{n}-X_{a})$
+  $X_{a}$ = $X_{n}$
+  cont += 1
+end While
+if fx == 0 then
+  Print($X_{a}$ is root)
+else if error < tol 
+  Print($X_{a}$ is an approx with tol)
+else
+  Print(method failed with n iters)
+end if
+\end{lstlisting}
 \subsubsection{Newton}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Tambien conocido como el metodo de las tangentes. El valor de $x_{i+1}$ se obtiene como el punto de corte de la recta tangente a la curva $y = f(x)$ con el eje x, es decir en el punto $(x_{i},f(x_{i}))$. Generalizando:
+\[ x_{n+1} = x_{n} - \dfrac{f(x_{n})}{f'(x_{n})} \]
+
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Inputs: tol, $X_{0}$, n, delta
+fx = $f(X_{0})$
+dfx = $f'(X_{0})$
+cont = 0
+error = tol + 1
+While fx $\neq$ 0 and dfx \neq 0 and error > tol and cont < n do
+  $X_{1}$ = $x_{0}- \dfrac{fx}{dfx}$
+  fx = $f(X_{1})$
+  dfx = $f'(X_{1})$
+  error = $abs(X_{n}-X_{a})$
+  $X_{0}$ = $X_{1}$
+  cont += 1
+end While
+if fx == 0 then
+  Print($X_{0}$ is root)
+else if error < tol 
+  Print($X_{1}$ is an approx with tol)
+else if dfx == 0 then
+  Print($X_{1}$ is maybe a multiple root)
+else
+  Print(method failed with n iters)
+end if
+\end{lstlisting}
+
 \subsubsection{Secante}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Es una variante del metodo de Newton, en el cual se cambia la derivada por una expresion que la aproxima.
+\[ x_{n+1} = x_{n} - \dfrac{f(x_{n})(x_{n}-x_{n-1})}{f(x_{n})-f(x_{n-1})} \]
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Inputs: tol, $X_{0}$,$X_{1}$, n, delta
+fx0 = $f(X_{0})$
+if fx0 == 0 then
+  Print($x_{0}$ is a root)
+else
+  fx1 = $f(X_{1})$
+  cont = 0
+  error = tol + 1
+  den = fx1 - fx0
+  While fx1 $\neq$ 0 and error > tol and cont < n do
+    $X_{2} = X_{1} - \dfrac{fx1*(X_{1}-X_{0})}{den}$
+    error = abs($X_{2}-X_{1}$)
+    $X_{0}$ = $x_{1}$
+    fx0 = fx1
+    $X_{1}$ = $x_{2}$
+    fx1 = $f(X_{1})$
+    den = fx1 - fx0
+    cont += 1
+  end While
+  if fx == 0 then
+    Print($X_{1}$ is root)
+  else if error < tol 
+    Print($X_{1}$ is an approx with tol)
+  else if den == 0 then
+    Print(maybe a multiple root)
+  else
+    Print(method failed with n iters)
+  end if
+end if
+\end{lstlisting}
 
 \newpage
 \section{Sistemas de ecuaciones}
@@ -111,5 +217,51 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 \subsubsection{Splines cubicos}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\newpage
+\section{Integracion}
+\subsection{Metodo del trapecio}
+
+\subsection{Metodo de simpson 1/3}
+
+\newpage
+\section{Solucion numerica de ecuaciones diferenciales}
+Esta no es una funcion sino el conjunto de puntos por donde pasa el intervalo definido.
+\subsection{Metodo de euler}
+Reemplaza la derivada por la pendiente de una recta secante.
+\[ y(x_{i+1}) \approx y(x_{i}) + hf(x_{i},y_{i})\]
+El error en cada punto es proporcional a h (h es el delta entre puntos).
+\subsection{Metodo de euler modificado}
+\[ y(x_{i+1}) \approx y(x_{i}) + \dfrac{h}{2} (k_{1}+k_{2})\]
+\[ k_{1} = f(x_{i},y(x_{i})) \]
+\[ U = y(x_{i}) + hk_{1}\]
+\[ k_{2} = f(x_{i+1}, U)\]
+El error en cada punto es proporcional a $ch^{2}$.
+
+\subsection{Metodo Runge-Kutta (RK4)}
+\[ y(x_{i+1}) \approx y(x_{i}) + \dfrac{h}{6} (k_{1}+2k_{2}+2k_{3}+k_{4})\]
+\[ k_{1} = f(x_{i},y(x_{i})) \]
+\[ k_{2} = f(x_{i}+\dfrac{h}{2},y(x_{i}) + \dfrac{hk_{1}}{2}) \]
+\[ k_{3} = f(x_{i}+\dfrac{h}{2},y(x_{i}) + \dfrac{hk_{2}}{2}) \]
+\[ k_{4} = f(x_{i}+h,y(x_{i}) + hk_{3}) \]
+
+\begin{thebibliography}{9}
+\bibitem{blog}
+  Blog de analisis numerico.
+  \textit{Numerical Analysis Yepes \& Broz}.
+  Internet, (Sep 11 2013).
+
+\bibitem{repo}
+  Proyecto analisis numerico 2014.
+  \textit{https://github.com/FelipeBuiles/CalcNA2}.
+  Internet.
+
+\bibitem{abook}
+  Francisco Jose Correa.
+  \textit{Metodos numericos}.
+  Fondo editorial universidad EAFIT.
   
+\end{thebibliography}
+
+
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.9.11)  18 NOV 2015 10:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.9.11)  18 NOV 2015 12:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -89,6 +89,64 @@ File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
 Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip44
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen108
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen109
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count98
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count99
+\leftroot@=\count100
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count101
+\DOTSCASE@=\count102
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen110
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
+\dotsspace@=\muskip10
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
+\tag@help=\toks18
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
+\andhelp@=\toks19
+\eqnshift@=\dimen111
+\alignsep@=\dimen112
+\tagshift@=\dimen113
+\tagwidth@=\dimen114
+\totwidth@=\dimen115
+\lineht@=\dimen116
+\@envbody=\toks20
+\multlinegap=\skip45
+\multlinetaggap=\skip46
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
@@ -103,44 +161,42 @@ Package ifvtex Info: VTeX not detected.
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count98
-\Gm@cntv=\count99
-\c@Gm@tempcnt=\count100
-\Gm@bindingoffset=\dimen108
-\Gm@wd@mp=\dimen109
-\Gm@odd@mp=\dimen110
-\Gm@even@mp=\dimen111
-\Gm@layoutwidth=\dimen112
-\Gm@layoutheight=\dimen113
-\Gm@layouthoffset=\dimen114
-\Gm@layoutvoffset=\dimen115
-\Gm@dimlist=\toks17
+\Gm@cnth=\count110
+\Gm@cntv=\count111
+\c@Gm@tempcnt=\count112
+\Gm@bindingoffset=\dimen117
+\Gm@wd@mp=\dimen118
+\Gm@odd@mp=\dimen119
+\Gm@even@mp=\dimen120
+\Gm@layoutwidth=\dimen121
+\Gm@layoutheight=\dimen122
+\Gm@layouthoffset=\dimen123
+\Gm@layoutvoffset=\dimen124
+\Gm@dimlist=\toks22
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2014/10/28 v1.8i multicolumn formatting (FMi)
-\c@tracingmulticols=\count101
-\mult@box=\box28
-\multicol@leftmargin=\dimen116
-\c@unbalance=\count102
-\c@collectmore=\count103
-\doublecol@number=\count104
-\multicoltolerance=\count105
-\multicolpretolerance=\count106
-\full@width=\dimen117
-\page@free=\dimen118
-\premulticols=\dimen119
-\postmulticols=\dimen120
-\multicolsep=\skip44
-\multicolbaselineskip=\skip45
-\partial@page=\box29
-\last@line=\box30
-\maxbalancingoverflow=\dimen121
-\mult@rightbox=\box31
-\mult@grightbox=\box32
-\mult@gfirstbox=\box33
-\mult@firstbox=\box34
-\@tempa=\box35
-\@tempa=\box36
+\c@tracingmulticols=\count113
+\mult@box=\box30
+\multicol@leftmargin=\dimen125
+\c@unbalance=\count114
+\c@collectmore=\count115
+\doublecol@number=\count116
+\multicoltolerance=\count117
+\multicolpretolerance=\count118
+\full@width=\dimen126
+\page@free=\dimen127
+\premulticols=\dimen128
+\postmulticols=\dimen129
+\multicolsep=\skip47
+\multicolbaselineskip=\skip48
+\partial@page=\box31
+\last@line=\box32
+\maxbalancingoverflow=\dimen130
+\mult@rightbox=\box33
+\mult@grightbox=\box34
+\mult@gfirstbox=\box35
+\mult@firstbox=\box36
 \@tempa=\box37
 \@tempa=\box38
 \@tempa=\box39
@@ -156,14 +212,16 @@ Package: multicol 2014/10/28 v1.8i multicolumn formatting (FMi)
 \@tempa=\box49
 \@tempa=\box50
 \@tempa=\box51
-\c@columnbadness=\count107
-\c@finalcolumnbadness=\count108
-\last@try=\dimen122
-\multicolovershoot=\dimen123
-\multicolundershoot=\dimen124
-\mult@nat@firstbox=\box52
-\colbreak@box=\box53
-\mc@col@check@num=\count109
+\@tempa=\box52
+\@tempa=\box53
+\c@columnbadness=\count119
+\c@finalcolumnbadness=\count120
+\last@try=\dimen131
+\multicolovershoot=\dimen132
+\multicolundershoot=\dimen133
+\mult@nat@firstbox=\box54
+\colbreak@box=\box55
+\mc@col@check@num=\count121
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
@@ -171,38 +229,37 @@ Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen125
-\captionmargin@=\dimen126
-\captionwidth=\dimen127
-\caption@tempdima=\dimen128
-\caption@indent=\dimen129
-\caption@parindent=\dimen130
-\caption@hangindent=\dimen131
+\captionmargin=\dimen134
+\captionmargin@=\dimen135
+\captionwidth=\dimen136
+\caption@tempdima=\dimen137
+\caption@indent=\dimen138
+\caption@parindent=\dimen139
+\caption@hangindent=\dimen140
 )
-\c@ContinuedFloat=\count110
+\c@ContinuedFloat=\count122
 Package caption Info: listings package is loaded.
 ) (./anum.aux)
 \openout1 = `anum.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Try loading font information for T1+pplx on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 37.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-\big@size=\dimen132
-LaTeX Info: Redefining \microtypecontext on input line 36.
+LaTeX Info: Redefining \microtypecontext on input line 37.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -216,7 +273,7 @@ Package microtype Info: No adjustment of character kerning.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ppl.cfg
 File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 )
-\c@lstlisting=\count111
+\c@lstlisting=\count123
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -255,30 +312,30 @@ File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 38.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -288,7 +345,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `zplm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 37.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 38.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -298,37 +355,50 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 39.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 40.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 45.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 46.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <12> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 48.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 49.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 52.
- [2] [3] [4] [5] [6] (./anum.aux) ) 
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 53.
+ [2]
+LaTeX Font Info:    Try loading font information for OMS+pplx on input line 81.
+
+LaTeX Font Info:    No file OMSpplx.fd. on input line 81.
+
+
+LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textasteriskcentered' on input line 81.
+
+[3] [4] [5] [6] [7] [8] [9] [10] (./anum.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5214 strings out of 495020
- 82649 string characters out of 6181324
- 279385 words of memory out of 5000000
- 8307 multiletter control sequences out of 15000+600000
- 46622 words of font info for 135 fonts, out of 8000000 for 9000
+ 5854 strings out of 495020
+ 89835 string characters out of 6181324
+ 299700 words of memory out of 5000000
+ 8894 multiletter control sequences out of 15000+600000
+ 49826 words of font info for 159 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,6n,38p,456b,893s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvi
-ps/base/8r.enc} </home/pan/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600p
-k></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/urw/palatino/uplri8a.pfb>
-Output written on anum.pdf (6 pages, 82161 bytes).
+ 36i,6n,38p,456b,1468s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/pan/.texmf
+-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
+atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on anum.pdf (10 pages, 100551 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 32769 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 38913 words of extra memory for PDF output out of 42996 (max. 10000000)
 
