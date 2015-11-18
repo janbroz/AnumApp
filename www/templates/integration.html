@@ -5,9 +5,24 @@
   <ion-content class="has-header">
 
     <ion-list>
-      <ion-item class="item-stable" ng-click="showPopup()">
+      <ion-item class="item-stable" href="#/app/iinsert">
 	Insert data
       </ion-item>
+      <ion-item class="item-stable"
+		ng-click="toggleGroup(1)"
+		ng-class="{active: isGroupShown(1)}">
+	By area
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/simpson">
+	Simpson 1/3
+      </ion-item>
+      <ion-item class="item-accordion"
+		ng-show="isGroupShown(1)"
+		href="#/app/trapezoid">
+	Trapezoid
+      </ion-item>      
 
     </ion-list>
   </ion-content>

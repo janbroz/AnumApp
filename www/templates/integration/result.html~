@@ -1,0 +1,12 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <a class="button icon-left icon-chevron-left button-clear button-dark"
+       ng-click="modal.hide()"> Back </a>
+    <h1 class="title"> Resulting integrals</h1>
+  </ion-header-bar>
+  <ion-content>
+    <div class="row" ng-repeat="intg in data.intg track by $index">
+      Value: {{intg}}
+    </div>
+  </ion-content>
+</ion-modal-view>

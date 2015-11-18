@@ -281,6 +281,33 @@ angular.module('CalcNA', [ 'ionic', 'CalcNA.controllers', 'ng'])
       }
     }
   })
+  .state('app.iinsert', {
+    url: '/iinsert',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/integration/insert.html',
+        controller: 'IntegrInsertCtrl'
+      }
+    }
+  })
+  .state('app.trapezoid', {
+    url: '/trapezoid',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/integration/trapezoid.html',
+	controller: 'TrapCtrl'
+      }
+    }
+  })
+  .state('app.simpson', {
+    url: '/simpson',
+    views: {
+      'menuContent' :{
+        templateUrl: 'templates/integration/simpson.html',
+	controller: 'SimpsonCtrl'
+      }
+    }
+  })
   .state('app.pequations', {
     url: '/pequations',
     views: {

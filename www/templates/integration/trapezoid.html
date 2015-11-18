@@ -1,0 +1,34 @@
+<ion-view title="Trapezoid">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-ios7-information" ng-click="help()"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <div class="list list-inset">
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">f(x)</span>
+	<input type="text" placeholder="{{input.fx}}" ng-model="input.fx">
+      </label>
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">a</span>
+	<input type="number" ng-model="input.vala">
+      </label>
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">b</span>
+	<input type="number" ng-model="input.valb">
+      </label>
+      <label class="item item-input item-stacked-label">
+	<span class="input-label">cs</span>
+	<input type="number" ng-model="input.cs">
+      </label>
+      <br>
+      <button class="button button-block button-dark" ng-click="calc()">
+        Calculate
+      </button>      
+
+    </div>
+  </ion-content>
+
+</ion-view>

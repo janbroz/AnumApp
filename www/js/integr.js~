@@ -1,6 +1,4 @@
-angular.module('CalcNA.interp', ['ionic'])
-
-.controller('InterpCtrl', function($scope, $state, $ionicPopup, $ionicModal){
+angular.module('CalcNA.wap', ['ionic']);
 
 
-}
+
