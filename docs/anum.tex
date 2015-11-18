@@ -18,6 +18,7 @@
 \usepackage[T1]{fontenc}
 \linespread{1.05}
 \usepackage{microtype}
+\usepackage{listings}
 
 \usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
 \usepackage{multicol}
@@ -42,14 +43,32 @@
 
 \newpage
 \section{Ecuaciones no lineales}
-Son ecuaciones de la forma F(u) = 0. 
+Son ecuaciones de la forma $F(u) = 0$. 
 
 \subsection{Busquedas por intervalos}
-Something about the incremental search.
+Para este tipo de metodos usamos el algoritmo de busquedas incrementales como base, ya que devuelve un intervalo en el cual se encuentra la raiz. Cuando se tiene una funcion continua la funcion prueba con un valor inicial y el siguiente hasta que se agoten el numero maximo de iteraciones o hasta que encuentre un numero menor a cero evaluando ambos valores: $f(x_{i-1}) * f(x_{i}) < 0$.
+Teniendo el intervalo $[a,b]$ se aplica alguno de los siguientes metodos.
 
 \subsubsection{Biseccion}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+Se comienza desde un intervalo cerrado $[a,b]$ y teniendo en cuenta los parametros de tolerancia, numero de intervalos y delta se hace una biseccion y se toma el subintervalo donde el producto de la funcion $y = f(x)$ evaluada en sus extremos retorna un valor menor a 0.
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Inputs: f, X0, Xn, n, tol
+i = 1
+While i $\leq$ n {          
+  c = (Xo + Xn)/2      
+  If (f(c) = 0 or (Xo - Xn)/2) < tol then 
+    Print(c)
+    Stop
+  end If
+  i = i+ 1                                                         
+  If sign(f(c)) == sign(f(a)) then 
+    Xo = c 
+  else
+    Xn = c
+  end If
+end While
+\end{lstlisting}
 \subsubsection{Regla falsa}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
