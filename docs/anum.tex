@@ -187,43 +187,168 @@ end if
 \end{lstlisting}
 
 \newpage
-\section{Sistemas de ecuaciones}
-Sobre los sistemas de ecuaciones y para que sirven.
+\section{Sistemas de ecuaciones lineales}
+Es un conjunto de m ecuaciones lineales con n incognitas, que arroja como resultado un arreglo de valores para las incognitas.
 \subsection{Metodos directos}
-Que son los metodos directos.
+Se basa en aplicar un conjunto de operaciones al sistema de ecuaciones Ax = b.
 \subsubsection{Eliminacion gaussiana simple}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Se llega a una matriz triangular y se despejan los valores.
+\paragraph{Pseudocodigo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+Read(A, b)
+U,B = EliminacionGS(A,b)
+x = despeje(U,B)
+Print(x)
+
+EliminacionGS(A,b)
+  Ab = FormaAumentada(A,b,n)
+  for k=1 to n-1 do
+    for i=k+1 to n do
+      mult = $\dfrac{Ab_{ik}}{Ab_{kk}}$
+      for j=k to n+1 do
+        $Ab_{ij}$ = $Ab_{ij} - mult * Ab_{kj}$
+      end for
+    end for
+  end for
+  return Ab
+end 
+\end{lstlisting}
+\subsubsection{Eliminacion gaussiana con pivoteo}
+Se busca reducir los errores de redondeo, por lo que en cada etapa se quiere que el multiplicador sea lo mas pequeño posible. Incluye el pivoteo parcial y total.
+\paragraph{Pseudocodigo - Pivoteo\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+EliminacionGPivoteo(A,b,n)
+  Ab = FormaAumentada(A,b)
+  for k=0 to n-1 do
+    Ab = Pivoteo(Ab,n,k)
+    for i=k+1 to n do
+      mult = $\dfrac{Ab_{ik}}{Ab_{kk}}$
+      for j=k to n+1 do
+        $Ab_{ij}$ = $Ab_{ij} - mult * Ab_{kj}$
+      end for
+    end for
+  end for
+  return Ab
+end 
+\end{lstlisting}
 \subsubsection{Factorizacion LU}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Se reemplaza la matriz A por dos matrices triangulares (L y U) cuyo producto es igual a ella. A = LU. Debido a esto el sistema de ecuaciones Ax = b se transforma en LUx = b. Sustituyendo Ux = z se obtienen dos sistemas: Lz = b y Ux = z.
+\paragraph{Pseudocodigo - Factorizacion general\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+FactorizacionMat(A,b,n)
+  L,U = FactorizacionLU(A,n)
+  z = SustitucionProg(L,b)
+  x = SustitucionReg(U,z)
+  return x
+end
+\end{lstlisting}  
 \subsection{Metodos iterativos}
+Son generalizaciones del metodo de punto fijo para ecuaciones.
+\paragraph{Pseudocodigo - General\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+  Read(tol, $x^{(0)}$,n)
+  cont = 0
+  disp = tol + 1
+  While disp>tol and cont<n do
+    $x^{(1)}$ = (CalcSeidel($x^{(0)}$) or CalcJacobi($x^{(0)}$))
+    disp = norma($x^{(1)}$ - $x^{(0)}$)
+    $x^{(0)}$ = $x^{(1)}$
+    cont = cont +1
+  end While
+  if dis<tol then
+    Print($x^{(1)}$ is an approx with tol)
+  else
+    Print(Method failed with n iter)
+  end if
+\end{lstlisting}
+
+
 \subsubsection{Gauss Seidel}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\paragraph{Pseudocodigo - Iteracion GSeidel\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+CalcSeidel($x^{(0)}$)
+  for i=1 to n do
+    $x_{i}^{(1)}$ = $x_{i}^{(0)}$
+  end for
+  for i=1 to n do
+    suma = 0
+    for j=1 to n do
+      if j$\neq$i then
+        suma = suma + $a_{ij}*x_{j}^{(1)}$
+      end if
+    end for
+    $x_{i}^{(1)} = \dfrac{(b_{i}-suma)}{a_{ii}}$
+  end for
+  return x
+end
+\end{lstlisting}  
 \subsubsection{Jacobi}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\paragraph{Pseudocodigo - Iteracion Jacobi\\}
+\begin{lstlisting}[frame=single, mathescape=true]
+CalcJacobi($x^{(0)}$)
+  for i=1 to n do
+    suma = 0
+    for j=1 to n do
+      if j$\neq$i then
+        suma = suma + $a_{ij}*x_{j}^{(0)}$
+      end if
+    end for
+    $x_{i}^{(1)} = \dfrac{(b_{i}-suma)}{a_{ii}}$
+  end for
+  return x
+end
+\end{lstlisting}  
 
 \newpage
 \section{Interpolacion}
-Sobre la interpolacion.
+"Si se tienen n puntos en el plano se puede encontrar 1 y solo 1 polinomio de grado n-1 o menor".
 \subsection{Metodos con sistemas de ecuaciones}
-Sobre los metodos con sistemas de ecuaciones.
-\subsubsection{Neville}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 \subsubsection{Newton con diferencias divididas}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Se busca un polinomio de la forma $p(x) = b_{0}+b_{1}(x-x_{0})+b_{2}(x-x_{0})(x-x_{1}) + ...$
+Comenzando con dos puntos $(x_{0},y_{0})$ y $(x_{1},y_{1})$:\\
+$b_{0} = y_{0}$\\\\
+$b_{1} = \dfrac{y_{0}-y_{1}}{x_{0}-x_{1}}$\\\\
+$b_{2} = \dfrac{\dfrac{y_{0}-y_{1}}{x_{0}-x_{1}}-\dfrac{y_{1}-y_{2}}{x_{1}-x_{2}}}{x_{0}-x_{1}}$
+
 \subsubsection{Lagrange}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Se busca un polinomio de la forma $p(x) = \sum_{i=0}^{n} y_{i}L_{i}$, donde $L_{i}$ se define como:
+\[ L_{i} = \prod_{j=0, j \neq i}^{n} \dfrac{x-x_{j}}{x_{i}-x_{j}}            \]
 \subsection{Splines}
+Si hay muchos puntos el caracter del polinomio que se obtiene por los metodos de newton y lagrange se deteriora. En este se usan splines que definen funciones por tramos para los polinomios.
 \subsubsection{Splines lineales}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Para un numero de puntos n $(x_{0},y_{0}),(x_{1},y_{1}),...,(x_{n},y_{n})$
+\[p(x) =
+\left\{
+	\begin{array}{ll}
+		m_{1}x+b_{1}  & \mbox{if } x_{0} \leq x \leq x_{1}  \\
+		m_{2}x+b_{2}  & \mbox{if } x_{1} \leq x \leq x_{2}  \\
+                ... \\
+                m_{n}x+b_{n}  & \mbox{if } x_{n-1} \leq x \leq x_{n}  \\
+	\end{array}
+\right.         \]
 \subsubsection{Splines cubicos}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\[p(x) =
+\left\{
+	\begin{array}{ll}
+		a_{1}x^{3}+b_{1}x^{2}+c_{1}x+d_{1}  & \mbox{if } x_{0} \leq x \leq x_{1}  \\
+		a_{2}x^{3}+b_{2}x^{2}+c_{2}x+d_{2}  & \mbox{if } x_{1} \leq x \leq x_{2}  \\
+                ... \\
+                a_{n}x^{3}+b_{n}x^{2}+c_{n}x+d_{n}  & \mbox{if } x_{n-1} \leq x \leq x_{n}  \\
+	\end{array}
+\right.         \]
+
 
 \newpage
 \section{Integracion}
+Se busca llegar a la integral de una funcion en un segmento $[a,b]$ mediante el uso de areas.
 \subsection{Metodo del trapecio}
+\[ \int_{x_{0}}^{x_{n}} f(x)dx = \int_{x_{0}}^{x_{1}} f(x)dx +\int_{x_{1}}^{x_{2}} f(x)dx + ... + \int_{x_{n-1}}^{x_{n}} f(x)dx  \]
+\[ \int_{x_{0}}^{x_{n}} f(x)dx \approx \dfrac{h}{2}[y_{0} + \sum_{i=1}^{n-1} y_{i} + y_{n}] \]
 
 \subsection{Metodo de simpson 1/3}
-
+Necesita 2n+1 puntos para usarse (3 como minimo).
+\[ \int_{x_{0}}^{x_{n}} f(x)dx = \int_{x_{0}}^{x_{1}} f(x)dx +\int_{x_{1}}^{x_{2}} f(x)dx + ... + \int_{x_{n-1}}^{x_{n}} f(x)dx  \]
+\[ \int_{x_{0}}^{x_{n}} f(x)dx \approx \dfrac{h}{3}[y_{0} + 4\sum_{i=0}^{n} y_{2i+1} + 2\sum_{i=1}^{n-1} y_{2i} + y_{n}] \]
 \newpage
 \section{Solucion numerica de ecuaciones diferenciales}
 Esta no es una funcion sino el conjunto de puntos por donde pasa el intervalo definido.
@@ -260,6 +385,11 @@ El error en cada punto es proporcional a $ch^{2}$.
   Francisco Jose Correa.
   \textit{Metodos numericos}.
   Fondo editorial universidad EAFIT.
+
+\bibitem{curs}
+  Analisis numerico 20152.
+  \textit{Notas del curso}.
+  Universidad EAFIT, 2015.
   
 \end{thebibliography}
 
