@@ -1,5 +1,9 @@
 FUNCIONAMIENTO
 -----------
+Para probarla sin instalar nada:
+https://cryptic-inlet-4366.herokuapp.com
+
+
 
 Para hacer funcionar la aplicacion primero debe tener en cuenta lo siguiente:
  - Tener instalado Ionic.
